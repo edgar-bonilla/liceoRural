@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LICEORURALJASMINEZB.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser :IdentityUser
     {
 
         [Required]

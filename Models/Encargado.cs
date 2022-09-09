@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace LICEORURALJASMINEZB.Models
 {
-    public class Docente
+    public class Encargado
     {
         [Key]
-        public int IdDocente { get; set; }
+        public int IdEncargado { get; set; }
         [Required]
         [Display(Name = "Cedula")]
         public string DocumentoIdentidad { get; set; }
@@ -19,15 +19,6 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Apellido")]
         public string Apellidos { get; set; }
-        [Required]
-        [Display(Name = " Fecha Nacimiento")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FechaNacimiento { get; set; }
-        [Required]
-        [Display(Name = "Sexo")]
-        public string Sexo { get; set; }
-        [Required]
         [Display(Name = "Ciudad")]
         public string Ciudad { get; set; }
         [Required]
@@ -39,7 +30,7 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Telefono")]
         public string NumeroTelefono { get; set; }
-       
+
         public string Estado { get; set; }
         public enum IsEstado { Activo = 0, Inactivo = 1 }
 
@@ -48,6 +39,6 @@ namespace LICEORURALJASMINEZB.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FechaRegistro { get; set; }
-        public List<Nivel> ListaNivel { get; set; }
+       
     }
 }

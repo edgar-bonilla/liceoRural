@@ -1,0 +1,46 @@
+﻿@model ClaimsUsuarioViewModel
+
+@{
+    ViewData["Title"] = "Acceso de usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<div class="container">
+    <form method="post">
+        <input type="hidden" asp-for="@Model.IdUsuario" />
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-center font-weight-bold" style="color:darkorange">Asignar permisos al usuario</h1>
+            </div>
+            <div class="card-body">
+                @for (int i = 0; i < Model.Claims.Count; i++)
+                {
+                    <div class="m-3 form-check">
+                        <input type="hidden" asp-for="@Model.Claims[i].TipoClaim" />
+                        <input asp-for="@Model.Claims[i].Seleccionado" class="form-check-input" />
+                        <label class="form-check-label" asp-for="@Model.Claims[i].Seleccionado">
+                            @Model.Claims[i].TipoClaim
+                        </label>
+                    </div>
+                }
+                <div class="text-danger" asp-validation-summary="All"></div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" style="margin:15px" class="btn btn-success w-50">ASIGNAR PERMISOS</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+
+
+
+<br />

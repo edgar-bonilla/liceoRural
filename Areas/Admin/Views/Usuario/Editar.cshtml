@@ -1,0 +1,50 @@
+﻿@model ApplicationUser
+    <br />
+<h1 class="text-center font-weight-bold" style="color:darkorange">Asignar un rol al Usuario</h1>
+<div class="card-body">
+    <div class="container align-content-md-center">
+        <div class="row">
+            <div class="col-md-5">
+                <form method="post" asp-controller="Usuario" asp-action="Editar">
+                    <input asp-for="@Model.Id" type="hidden" />
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label asp-for="Nombres"  class="col-form-label"></label>
+                        </div>
+                        <div class="col-5">
+                            <input asp-for="Nombres" readonly class="form-control" />
+                        </div>
+                        <span asp-validation-for="Nombres" class="text-danger"></span>
+                    </div>
+
+
+                    @*<div class="form-group">
+                        <label asp-for="Nombres"></label>
+                        <input asp-for="Nombres" readonly class="form-control" />
+                    </div>*@
+                    <div class="form-group">
+                        <label asp-for="Apellidos"></label>
+                        <input asp-for="Apellidos" readonly class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" readonly class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdRol"></label>
+                        <select asp-for="IdRol" asp-items="@Model.ListaRoles" class="form-control">
+                            <option disabled selected>--Seleccionar Rol--</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary">Editar Usuario</button>
+                        <a asp-action="Index" class="text-dark  btn btn-success " style="width:auto">Volver atrás</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>

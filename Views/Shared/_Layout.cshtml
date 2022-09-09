@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LICEORURALJASMINEZ</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="  https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/style.css" rel="stylesheet" />
+
+
+
+
+    <link href="~/css/superslides.css" rel="stylesheet" />
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body class="host_version">
+    <!-- LOADER -->
+     
+    <!-- END LOADER -->
+    <!-- Start header -->
+    @*Start header*@
+    <header class="top-navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                @*<a class="navbar-brand" href="index.html">*@
+                <img src="~/image/licei.png" style="width:8%; height:8%" alt="hhhhh" />
+                @*</a>*@
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbars-host">
+
+                    <ul class="navbar-nav ml-auto">
+
+                        @*@if (User.IsInRole(DS.Role_Admin))
+                            {*@
+                        <lu>
+                            <li class="nav-item navbar-nav"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a></li>
+                        </lu>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Configuraciones </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+                                <a class="dropdown-item" href="course-grid-2.html">Course Grid 2 </a>
+                                <a class="dropdown-item" href="course-grid-3.html">Course Grid 3 </a>
+                                <a class="dropdown-item" href="course-grid-4.html">Course Grid 4 </a>
+                            </div>
+                        </li>
+                        @*}
+                            @if (User.IsInRole(DS.Role_Admin))
+                            {*@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Usuarios </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+                                <a class="dropdown-item" asp-area="Admin" asp-controller="Usuario" asp-action="Index">Crear Usuario </a>
+                                <a class="dropdown-item" href="blog-single.html">Blog single </a>
+                            </div>
+                        </li>
+                        @*}
+                            @if (User.IsInRole(DS.Role_Admin))
+                            {*@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown"> Docentes</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Docente" asp-area="Docentes">Crear Docente</a>
+                                <a class="dropdown-item" href="blog-single.html">Blog single </a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Alumnos</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+                                <a class="dropdown-item" asp-action="Index" asp-controller="Alumno" asp-area="Estudiantes">Crear Alumno</a>
+                                <a class="dropdown-item" href="blog-single.html">Blog single </a>
+                            </div>
+                        </li>
+
+                        <li class=" dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown" style="color:#4c5a7d">yyyyyyy</a>
+                            @*reviar eato qui puse un espacio*@
+                        </li>
+
+                        <partial name="_LoginPartial" />
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- End header -->
+    <div>
+        <main role="main" class="pb-1">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Sobre Nososotros</h3>
+                        </div>
+                        <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>
+                        <div class="footer-right">
+                            <ul class="footer-links-soi">
+                                <li><a href="#" class="logo-facebook"><ion-icon name="logo-facebook"></ion-icon></a></li>
+                                <li><a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a></li>
+                                <li><a href="#"><ion-icon name="logo-youtube"></ion-icon></a></li>
+                                <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+                                <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+                            </ul><!-- end links -->
+                        </div>
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>informacion</h3>
+                        </div>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Sobre</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="widget clearfix">
+                        <div class="widget-title">
+                            <h3>Contactos</h3>
+                        </div>
+                        <ul class="footer-links">
+                            <li><a href="mailto:#">info@liceojasmiez.com</a></li>
+                            <li><a href="#">www.yoursite.com</a></li>
+                            <li>Upala Colonia jasminez de la iglesia 100 metro norte</li>
+                            <li>+5068748932</li>
+                        </ul><!-- end links -->
+                    </div><!-- end clearfix -->
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </footer><!-- end footer -->
+
+    <div class="copyrights">
+        <div class="container">
+            <div class="footer-distributed">
+                <div class="footer-center">
+                    <p class="footer-company-name">Todos los Reservados. &copy; 2022 <a href="#">SmartEDU</a> Design By : <a href="https://html.design/">html design</a></p>
+                </div>
+            </div>
+        </div><!-- end container -->
+    </div><!-- end copyrights -->
+
+</body>
+</html>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="~/js/jquery.superslides.js" asp-append-version="true"></script>
+<script src="~/js/jquery/All.js"></script>
+<script src="~/js/custom.js"></script>
+<script>
+    timeline(document.querySelectorAll('.timeline'), {
+        forceVerticalMode: 700,
+        mode: 'horizontal',
+        verticalStartPosition: 'left',
+        visibleItems: 4
+    });
+</script>
+@RenderSection("Scripts", required: false)

@@ -17,6 +17,15 @@
 </head>
 <body class="host_version">
 
+    <!-- LOADER -->
+    @*<div id="preloader">
+        <div class="loader-container">
+            <div class="progress-br float shadow">
+                <div class="progress__item"></div>
+            </div>
+        </div>
+    </div>*@
+    <!-- END LOADER -->
     <header class="top-navbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -31,16 +40,16 @@
 
                 <div class="collapse navbar-collapse" id="navbars-host">
                     <ul class="navbar-nav ml-auto">
-                        @*<li class="nav-item "><a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Inicio</a></li>*@
+                        <li class="nav-item "><a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Inicio</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Configuraciones </a>
                             <div class="dropdown-menu" aria-labelledby="dropdown-a">
                                 <a class="dropdown-item" asp-action="Index"
                                    asp-controller="Periodo" asp-area="Admin">Crear periodos</a>
                                 <a class="dropdown-item" asp-action="Index"
-                                   asp-controller="SubCategory" asp-area="Admin">Crear nivel Academico</a>
+                                   asp-controller="Nivel" asp-area="Admin">Crear nivel Academico</a>
                                 <a class="dropdown-item" asp-action="Index"
-                                   asp-controller="SubCategory" asp-area="Admin">Crear grados y secciones</a>
+                                   asp-controller="GradoSeccion" asp-area="Admin">Crear grados y secciones</a>
                                 <a class="dropdown-item" asp-action="Index"
                                    asp-controller="SubCategory" asp-area="Admin">Asignar grados por Niveles </a>
                                 <a class="dropdown-item" asp-action="Index"
@@ -50,7 +59,7 @@
                                 <a class="dropdown-item" asp-action="Index"
                                    asp-controller="SubCategory" asp-area="Admin">Crear horarios</a>
                                 <a class="dropdown-item" asp-action="Index"
-                                   asp-controller="SubCategory" asp-area="Admin">Asignar Docentes por curso</a>
+                                   asp-controller="DocenteCurso" asp-area="Admin">Asignar Docentes por curso</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -169,7 +178,6 @@
 
 </body>
 </html>
-
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

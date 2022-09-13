@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace LICEORURALJASMINEZB.Models
         [Display(Name = " Fecha Nacimiento")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
         [Required]
         [Display(Name = "Sexo")]
         public string Sexo { get; set; }
@@ -47,7 +48,8 @@ namespace LICEORURALJASMINEZB.Models
         [Display(Name = " Fecha Registro")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime FechaRegistro { get; set; }
+        public DateTime? FechaRegistro { get; set; }
+        [NotMapped]
         public List<Nivel> ListaNivel { get; set; }
     }
 }

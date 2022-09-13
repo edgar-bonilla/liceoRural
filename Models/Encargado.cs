@@ -11,14 +11,14 @@ namespace LICEORURALJASMINEZB.Models
         [Key]
         public int IdEncargado { get; set; }
         [Required]
-        [Display(Name = "Cedula")]
-        public string DocumentoIdentidad { get; set; }
-        [Required]
         [Display(Name = "Nombre")]
         public string Nombres { get; set; }
         [Required]
         [Display(Name = "Apellido")]
         public string Apellidos { get; set; }
+        [Required]
+        [Display(Name = "Cedula")]
+        public string DocumentoIdentidad { get; set; }
         [Display(Name = "Ciudad")]
         public string Ciudad { get; set; }
         [Required]

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<LICEORURALJASMINEZB.Models.NivelDetalleCurso>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NivelDetalle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nivel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradoSeccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Curso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NivelDetalle.IdNivelDetalle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nivel.IdNivel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GradoSeccion.IdGradoSeccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Estado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdNivelDetalleCurso">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdNivelDetalleCurso">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdNivelDetalleCurso">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

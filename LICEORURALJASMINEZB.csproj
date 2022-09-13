@@ -7,21 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Areas\Admin\Models\**" />
     <Compile Remove="Areas\Docentes\Data\**" />
     <Compile Remove="Areas\Docentes\Models\**" />
     <Compile Remove="Areas\Estudiantes\Data\**" />
     <Compile Remove="Areas\Estudiantes\Models\**" />
     <Compile Remove="Controllers\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Models\**" />
     <Content Remove="Areas\Docentes\Data\**" />
     <Content Remove="Areas\Docentes\Models\**" />
     <Content Remove="Areas\Estudiantes\Data\**" />
     <Content Remove="Areas\Estudiantes\Models\**" />
     <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
     <EmbeddedResource Remove="Areas\Docentes\Data\**" />
     <EmbeddedResource Remove="Areas\Docentes\Models\**" />
     <EmbeddedResource Remove="Areas\Estudiantes\Data\**" />
     <EmbeddedResource Remove="Areas\Estudiantes\Models\**" />
     <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Models\**" />
     <None Remove="Areas\Docentes\Data\**" />
     <None Remove="Areas\Docentes\Models\**" />
     <None Remove="Areas\Estudiantes\Data\**" />
@@ -43,8 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="wwwroot\image\" />
   </ItemGroup>
 

@@ -15,11 +15,15 @@ namespace LICEORURALJASMINEZB.Models
         [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
         [Required]
-        [Display(Name = "Fecha Incio")]
-        public DateTime FechaInicio { get; set; }
+        [Display(Name = "Fecha inicio")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaInicio { get; set; }
         [Required]
         [Display(Name = "Fecha Fin")]
-        public DateTime FechaFin { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaFin { get; set; }
         public string Estado { get; set; }
         public enum IsEstado { Activo = 0, Inactivo = 1  }
     }

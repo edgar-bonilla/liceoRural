@@ -10,6 +10,11 @@ namespace LICEORURALJASMINEZB.Models
     {
         [Key]
         public int IdCurso { get; set; }
+        [Required]
+        [Display(Name = "Curso")]
+        public string NombreCurso { get; set; }
+        [Required]
+        [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
         [Required]
         [Display(Name = "Estado")]

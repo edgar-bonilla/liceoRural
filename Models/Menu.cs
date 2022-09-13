@@ -11,12 +11,18 @@ namespace LICEORURALJASMINEZB.Models
     {
         [Key]
         public int IdMenu { get; set; }
+        [Required]
+        [Display(Name = "Nombre")]
         public string Nombre { get; set; }
         public string Icono { get; set; }
         [NotMapped]
         public List<SubMenu> SubMenu { get; set; }
         public string Estado { get; set; }
         public enum IsEstado { Activo = 0, Inactivo = 1 }
-        public DateTime FechaRegistro { get; set; }
+        [Required]
+        [Display(Name = "Fecha Registro")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? FechaRegistro { get; set; }
     }
 }

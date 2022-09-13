@@ -19,6 +19,7 @@ namespace LICEORURALJASMINEZB.Models
         public virtual GradoSeccion GradoSeccion { get; set; }
         public int TotalVacantes { get; set; }
         public int VacantesDisponibles { get; set; }
+
         public int VacantesOcupadas { get; set; }
         public string Estado { get; set; }
         public enum IsEstado { Activo = 0, Inactivo= 1  }

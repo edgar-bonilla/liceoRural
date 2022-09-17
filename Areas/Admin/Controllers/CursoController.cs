@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LICEORURALJASMINEZB.Data;
 using LICEORURALJASMINEZB.Models;
 
+
 namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -25,8 +26,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         {
             return View(await _context.Curso.ToListAsync());
         }
-
-        // GET: Admin/Curso/Details/5
+    
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,15 +44,12 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             return View(curso);
         }
 
-        // GET: Admin/Curso/Create
+    
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Curso/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdCurso,NombreCurso,Descripcion,Estado")] Curso curso)
@@ -82,9 +79,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             return View(curso);
         }
 
-        // POST: Admin/Curso/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdCurso,NombreCurso,Descripcion,Estado")] Curso curso)
@@ -151,4 +146,5 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             return _context.Curso.Any(e => e.IdCurso == id);
         }
     }
+  
 }

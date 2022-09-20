@@ -43,7 +43,7 @@ namespace LICEORURALJASMINEZB.Models
         public string Telefono { get; set; }
   
         public string Estado { get; set; }
-        public enum IsEstado {Activo = 0 , Inactivo = 1 , Aplazado = 2 }
+        public enum IsEstado {Activo = 1 , Inactivo = 2, Aplazado = 3 }
         [Required]
         [Display(Name = " Fecha_Registro")]
         [DataType(DataType.Date)]

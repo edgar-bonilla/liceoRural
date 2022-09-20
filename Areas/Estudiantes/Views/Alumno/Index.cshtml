@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
 <div class="container ">
   
     <div class="row">
@@ -74,7 +75,19 @@
                         @Html.DisplayFor(modelItem => item.Telefono)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
+                        @if (item.Estado == "1")
+                        {
+                            <p>Activo</p>
+                        }
+                        @if (item.Estado == "2")
+
+                        {
+                            <p>Inactivo</p>
+                        }
+                        @if (item.Estado == "3")
+                        {
+                            <p>Aplazado</p>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FechaRegistro)

@@ -75,13 +75,15 @@
                     @Html.DisplayFor(modelItem => item.NumeroTelefono)
                 </td>
                 <td>
-
-
-                    @if (item.Estado.Equals(1))
+                    @if (item.Estado == "1")
                     {
-                        <p>The value was even.</p>
+                        <p>Activo</p>
                     }
-                    @*@Html.DisplayFor(modelItem => item.Estado)*@
+                    @if (item.Estado == "2")
+
+                    {
+                        <p>Inactivo</p>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaRegistro)

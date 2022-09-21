@@ -19,7 +19,7 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Estado")]
         public string Estado { get; set; }
-        public enum IsEstado { Activo = 0, Inactivo = 1 }
+        public enum IsEstado { Activo = 1, Inactivo = 2  }
 
 
     }

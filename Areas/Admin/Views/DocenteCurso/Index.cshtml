@@ -38,9 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDocenteCurso">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDocenteCurso">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDocenteCurso">Delete</a>
+                <partial name="_TableButtonPartial" model="item.IdDocenteCurso" />
             </td>
         </tr>
 }

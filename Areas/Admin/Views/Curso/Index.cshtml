@@ -42,7 +42,16 @@
                         @Html.DisplayFor(modelItem => item.Descripcion)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
+                        @if (item.Estado == "1")
+                        {
+                            <p>Activo</p>
+                        }
+                        @if (item.Estado == "2")
+
+                        {
+                            <p>Inactivo</p>
+                        }
+                     
                     </td>
                     <td style="width:150px;"><partial name="_TableButtonPartial" model="item.IdCurso" /></td>
                 </tr>

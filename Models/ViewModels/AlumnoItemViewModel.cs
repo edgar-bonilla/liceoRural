@@ -7,6 +7,9 @@ namespace LICEORURALJASMINEZB.Models.ViewModels
 {
     public class AlumnoItemViewModel
     {
+     
+
         public Alumno Alumno { get; set; }
+        public Matricula Matricula { get; set; }
     }
 }

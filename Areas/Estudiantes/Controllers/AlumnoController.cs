@@ -50,9 +50,6 @@ namespace LICEORURALJASMINEZB.Areas.Estudiantes.Controllers
             return View();
         }
 
-        // POST: Estudiantes/Alumno/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdAlumno,Nombres,Apellidos,DocumentoIdentidad,FechaNacimiento,Sexo,Ciudad,Direccion,Correo,Telefono,Estado,FechaRegistro")] Alumno alumno)
@@ -82,9 +79,6 @@ namespace LICEORURALJASMINEZB.Areas.Estudiantes.Controllers
             return View(alumno);
         }
 
-        // POST: Estudiantes/Alumno/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdAlumno,Nombres,Apellidos,DocumentoIdentidad,FechaNacimiento,Sexo,Ciudad,Direccion,Correo,Telefono,Estado,FechaRegistro")] Alumno alumno)

@@ -31,7 +31,7 @@ namespace LICEORURALJASMINEZB.Models
         [Display(Name = "Telefono")]
         public string NumeroTelefono { get; set; }
 
-        public string Estado { get; set; }
+        public string Estadoi { get; set; }
         public enum IsEstado { Activo = 0, Inactivo = 1 }
 
         [Required]

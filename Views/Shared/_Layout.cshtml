@@ -18,13 +18,13 @@
 <body class="host_version">
 
     <!-- LOADER -->
-    @*<div id="preloader">
-        <div class="loader-container">
-            <div class="progress-br float shadow">
-                <div class="progress__item"></div>
+    <div id="preloader">
+            <div class="loader-container">
+                <div class="progress-br float shadow">
+                    <div class="progress__item"></div>
+                </div>
             </div>
         </div>
-    </div>*@
     <!-- END LOADER -->
     <header class="top-navbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -112,7 +112,7 @@
         </nav>
     </header>
     <!-- End header -->
-    <div class="container">
+    <div>
         <main role="main" class="pb-1">
             @RenderBody()
         </main>
@@ -182,15 +182,15 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="~/js/jquery/DataTable.js"></script>
 <script src="~/js/jquery.superslides.js" asp-append-version="true"></script>
 <script src="~/js/jquery/All.js"></script>
 <script src="~/js/custom.js"></script>
-<script>
-    timeline(document.querySelectorAll('.timeline'), {
-        forceVerticalMode: 700,
-        mode: 'horizontal',
-        verticalStartPosition: 'left',
-        visibleItems: 4
-    });
-</script>
 @RenderSection("Scripts", required: false)
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>

@@ -4,14 +4,16 @@ using LICEORURALJASMINEZB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LICEORURALJASMINEZB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221006215839_matricula")]
+    partial class matricula
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -823,13 +825,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Alumno", "Alumno")
                         .WithMany()
                         .HasForeignKey("IdAlumno")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Concentrado", "Concentrado")
                         .WithMany()
                         .HasForeignKey("IdConcentrado")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -838,7 +840,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.DocenteCurso", "DocenteCurso")
                         .WithMany()
                         .HasForeignKey("IdDocenteCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -847,13 +849,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Docente", "Docente")
                         .WithMany()
                         .HasForeignKey("IdDocente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalleCurso", "NivelDetalleCurso")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalleCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -862,7 +864,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalleCurso", "NivelDetalleCurso")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalleCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -871,19 +873,19 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Alumno", "Alumno")
                         .WithMany()
                         .HasForeignKey("IdAlumno")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalle", "NivelDetalle")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalle")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalleCurso", "NivelDetalleCurso")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalleCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -892,7 +894,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Periodo", "Periodo")
                         .WithMany()
                         .HasForeignKey("IdPeriodo")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -901,13 +903,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.GradoSeccion", "GradoSeccion")
                         .WithMany()
                         .HasForeignKey("IdGradoSeccion")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Nivel", "Nivel")
                         .WithMany()
                         .HasForeignKey("IdNivel")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -916,25 +918,25 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Curso", "Curso")
                         .WithMany()
                         .HasForeignKey("IdCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.GradoSeccion", "GradoSeccion")
                         .WithMany()
                         .HasForeignKey("IdGradoSeccion")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Nivel", "Nivel")
                         .WithMany()
                         .HasForeignKey("IdNivel")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalle", "NivelDetalle")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalle")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -943,7 +945,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -952,7 +954,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -961,7 +963,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -970,13 +972,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -985,7 +987,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

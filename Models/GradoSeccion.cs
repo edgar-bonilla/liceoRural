@@ -12,10 +12,10 @@ namespace LICEORURALJASMINEZB.Models
         [Key]
         public int IdGradoSeccion { get; set; }
         [Required]
-        [Display(Name = "Descripcion Grado")]
+        [Display(Name = "Grado")]
         public string DescripcionGrado { get; set; }
         [Required]
-        [Display(Name = "Descripcion Seccion ")]
+        [Display(Name = "Seccion ")]
         public string DescripcionSeccion { get; set; }
         public string Estado { get; set; }
         public enum estado { Activo = 0, Inactivo = 1 }

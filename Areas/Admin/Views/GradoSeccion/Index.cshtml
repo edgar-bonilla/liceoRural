@@ -5,44 +5,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<br />
+<div class="container ">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionGrado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionSeccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescripcionGrado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescripcionSeccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdGradoSeccion">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdGradoSeccion">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdGradoSeccion">Delete</a>
-            </td>
-        </tr>
+    <div class="row">
+
+        <div class="col-6">
+
+        </div>
+        <div class="col-6 text-right">
+            <partial name="_CreatePartialButton" />
+        </div>
+    </div>
+    <table  id="tabla" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescripcionGrado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescripcionSeccion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionGrado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionSeccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td style="width:150px;"><partial name="_TableButtonPartial" model="item.IdGradoSeccion" /></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            $('#tabla').DataTable({
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ],
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+
+            });
+        });
+    </script>
+
 }
-    </tbody>
-</table>

@@ -4,54 +4,55 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<div class="container ">
 
-<h1>Index</h1>
+    <div class="row">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreCurso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreCurso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
+        <div class="col-6">
 
-                @if (item.Estado == "1")
-                {
-                    <p>Activo</p>
-                }
-                @if (item.Estado == "2")
+        </div>
+        <div class="col-6 text-right">
+            <partial name="_CreatePartialButton" />
+        </div>
+    </div>
+    <table id="example" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreCurso)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCurso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td style="width:150px;"><partial name="_TableButtonPartial" model="item.IdCurso" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
-                {
-                    <p>Inactivo</p>
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCurso">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCurso">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCurso">Delete</a>
-            </td>
-        </tr>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-    </tbody>
-</table>
+
+

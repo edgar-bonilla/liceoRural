@@ -21,5 +21,6 @@ namespace LICEORURALJASMINEZB.Models
         public int IdNivelDetalle { get; set; }
         [ForeignKey(" IdNivelDetalle ")]
         public virtual NivelDetalle NivelDetalle { get; set; }
+
     }
 }

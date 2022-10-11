@@ -5,42 +5,118 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row mt-4">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-10">
+                        Asignar docente por curso
+                    </div>
+                    <div class="col-md-2">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NivelDetalleCurso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Docente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NivelDetalleCurso.IdNivelDetalleCurso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Docente.Apellidos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                <partial name="_TableButtonPartial" model="item.IdDocenteCurso" />
-            </td>
-        </tr>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="cboPeriodo">Periodo</label>
+                            <select id="cboperiodo" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="cboNivelAcademico">Nivel Academico</label>
+                            <select id="cboNivelAcademico" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="cboGradoSeccion">Grado Seccion</label>
+                            <select id="cboGradoSeccion" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="bg"></label>
+                            <button type="button" class="btn btn-success btn-block mt-1" id="btnBuscar" onclick="Buscar()">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="cboCurso">Curso</label>
+                            <select id="cboCurso" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="cboDiaSemana">Docente</label>
+                            <select id="cboDocente" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="bg"></label>
+                            <button type="button" class="btn btn-secondary btn-block mt-1" id="btnBuscar" onclick="Asignar()">Asignar</button>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="tabla" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>IdCurso</th>
+                                    <th>Codigo Docente</th>
+                                    <th>Docente</th>
+                                    <th>Nivel Academico</th>
+                                    <th>Grado - Seccion</th>
+                                    <th>Curso</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/AsignarDocente.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            $('#tabla').DataTable({
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ],
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+
+            });
+        });
+    </script>
+
 }
-    </tbody>
-</table>

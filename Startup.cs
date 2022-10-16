@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using LICEORURALJASMINEZ.Utilidades;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
+using LICEORURALJASMINEZB.Repositorio;
 
 namespace LICEORURALJASMINEZB
 {
@@ -34,6 +36,7 @@ namespace LICEORURALJASMINEZB
                       Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IUnidadTrabajo, UnidadTrabajo>();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages(); ;

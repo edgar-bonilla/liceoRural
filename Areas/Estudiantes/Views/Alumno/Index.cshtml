@@ -1,57 +1,58 @@
 ﻿@model IEnumerable<LICEORURALJASMINEZB.Models.Alumno>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Alumno";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
-<div class="container ">
+<div class="p-4 border rounded">
+    <div class="container ">
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-6">
+            <div class="col-6">
 
+            </div>
+            <div class="col-6 text-right">
+                <partial name="_CreatePartialButton" />
+            </div>
         </div>
-        <div class="col-6 text-right">
-            <partial name="_CreatePartialButton" />
-        </div>
-    </div>
-    <table id="example" class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombres)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Apellidos)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DocumentoIdentidad)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaNacimiento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sexo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ciudad)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Telefono)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaRegistro)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+        <table id="example" class="table table-striped border">
+            <thead class="thead-light">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombres)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Apellidos)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DocumentoIdentidad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaNacimiento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sexo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Ciudad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaRegistro)
+                    </th>
+                    <th></th>
+                    </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nombres)
@@ -66,7 +67,15 @@
                         @Html.DisplayFor(modelItem => item.FechaNacimiento)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Sexo)
+                        @if (item.Estado == "1")
+                        {
+                            <p>F</p>
+                        }
+                        @if (item.Estado == "2")
+
+                        {
+                            <p>M</p>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Ciudad)
@@ -92,13 +101,16 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.FechaRegistro)
                     </td>
-                    <td style="width:150px;"><partial name="_TableButtonPartial" model="item.IdAlumno" /></td>
+                    <td style="width:150px;"><partial name="_TableButtonPartial" model="item.Id" /></td>
                 </tr>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
+
+    </div>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 }
+<br />

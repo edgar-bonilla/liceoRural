@@ -38,7 +38,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             var docenteCurso = await _context.DocenteCurso
                 .Include(d => d.Docente)
                 .Include(d => d.NivelDetalleCurso)
-                .FirstOrDefaultAsync(m => m.IdDocenteCurso == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (docenteCurso == null)
             {
                 return NotFound();
@@ -99,7 +99,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdDocenteCurso,IdNivelDetalleCurso,IdDocente,Estado")] DocenteCurso docenteCurso)
         {
-            if (id != docenteCurso.IdDocenteCurso)
+            if (id != docenteCurso.Id)
             {
                 return NotFound();
             }
@@ -113,7 +113,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DocenteCursoExists(docenteCurso.IdDocenteCurso))
+                    if (!DocenteCursoExists(docenteCurso.Id))
                     {
                         return NotFound();
                     }
@@ -140,7 +140,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             var docenteCurso = await _context.DocenteCurso
                 .Include(d => d.Docente)
                 .Include(d => d.NivelDetalleCurso)
-                .FirstOrDefaultAsync(m => m.IdDocenteCurso == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (docenteCurso == null)
             {
                 return NotFound();
@@ -162,7 +162,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
         private bool DocenteCursoExists(int id)
         {
-            return _context.DocenteCurso.Any(e => e.IdDocenteCurso == id);
+            return _context.DocenteCurso.Any(e => e.Id == id);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace LICEORURALJASMINEZB.Models
 
         [Key]
         [Display(Name = "ID")]
-        public int IdAlumno { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Nombre")]
         public string Nombres { get; set; }
@@ -29,6 +29,7 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Sexo")]
         public string Sexo { get; set; }
+         public enum IsSexo { Femenino = 1, Masculino = 2 }
         [Required]
         [Display(Name = "Ciudad")]
         public string Ciudad { get; set; }

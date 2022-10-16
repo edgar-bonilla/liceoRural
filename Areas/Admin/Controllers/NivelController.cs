@@ -37,7 +37,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
             var nivel = await _context.Nivel
                 .Include(n => n.Periodo)
-                .FirstOrDefaultAsync(m => m.IdNivel == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (nivel == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdNivel,IdPeriodo,DescripcionNivel,DescripcionTurno,HoraInicio,HoraFin,Estado")] Nivel nivel)
         {
-            if (id != nivel.IdNivel)
+            if (id != nivel.Id)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NivelExists(nivel.IdNivel))
+                    if (!NivelExists(nivel.Id))
                     {
                         return NotFound();
                     }
@@ -133,7 +133,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
             var nivel = await _context.Nivel
                 .Include(n => n.Periodo)
-                .FirstOrDefaultAsync(m => m.IdNivel == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (nivel == null)
             {
                 return NotFound();
@@ -155,7 +155,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
         private bool NivelExists(int id)
         {
-            return _context.Nivel.Any(e => e.IdNivel == id);
+            return _context.Nivel.Any(e => e.Id == id);
         }
     }
 }

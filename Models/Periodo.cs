@@ -9,7 +9,7 @@ namespace LICEORURALJASMINEZB.Models
     public class Periodo
     {
         [Key]
-        public int IdPeriodo { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Descripcion")]

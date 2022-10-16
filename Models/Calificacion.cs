@@ -10,7 +10,7 @@ namespace LICEORURALJASMINEZB.Models
     public class Calificacion
     {
         [Key]
-        public int IdCalificacion { get; set; }
+        public int Id { get; set; }
         public int IdConcentrado { get; set; }
         [ForeignKey("IdConcentrado")]
         public virtual Concentrado Concentrado { get; set; }

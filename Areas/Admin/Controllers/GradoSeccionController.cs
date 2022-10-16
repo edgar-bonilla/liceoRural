@@ -35,7 +35,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             }
 
             var gradoSeccion = await _context.GradoSeccion
-                .FirstOrDefaultAsync(m => m.IdGradoSeccion == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (gradoSeccion == null)
             {
                 return NotFound();
@@ -89,7 +89,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdGradoSeccion,DescripcionGrado,DescripcionSeccion,Estado")] GradoSeccion gradoSeccion)
         {
-            if (id != gradoSeccion.IdGradoSeccion)
+            if (id != gradoSeccion.Id)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GradoSeccionExists(gradoSeccion.IdGradoSeccion))
+                    if (!GradoSeccionExists(gradoSeccion.Id))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             }
 
             var gradoSeccion = await _context.GradoSeccion
-                .FirstOrDefaultAsync(m => m.IdGradoSeccion == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (gradoSeccion == null)
             {
                 return NotFound();
@@ -148,7 +148,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
         private bool GradoSeccionExists(int id)
         {
-            return _context.GradoSeccion.Any(e => e.IdGradoSeccion == id);
+            return _context.GradoSeccion.Any(e => e.Id == id);
         }
     }
 }

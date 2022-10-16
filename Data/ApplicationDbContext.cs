@@ -28,7 +28,7 @@ namespace LICEORURALJASMINEZB.Data
         public DbSet<NivelDetalle> NivelDetalle { get; set; }
         public DbSet<NivelDetalleCurso> NivelDetalleCurso { get; set; }
         public DbSet<Periodo> Periodo { get; set; }
-
+        public DbSet<Imagen> image { get; set; }
         public DbSet<Encargado> encargado { get; set; }
         public DbSet<SubMenu> SubMenu { get; set; }
     }

@@ -35,7 +35,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
             }
 
             var docente = await _context.Docente
-                .FirstOrDefaultAsync(m => m.IdDocente == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (docente == null)
             {
                 return NotFound();
@@ -89,7 +89,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdDocente,DocumentoIdentidad,Nombres,Apellidos,FechaNacimiento,Sexo,Ciudad,Direccion,Email,NumeroTelefono,Estado,FechaRegistro")] Docente docente)
         {
-            if (id != docente.IdDocente)
+            if (id != docente.Id)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DocenteExists(docente.IdDocente))
+                    if (!DocenteExists(docente.Id))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
             }
 
             var docente = await _context.Docente
-                .FirstOrDefaultAsync(m => m.IdDocente == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (docente == null)
             {
                 return NotFound();
@@ -148,7 +148,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
 
         private bool DocenteExists(int id)
         {
-            return _context.Docente.Any(e => e.IdDocente == id);
+            return _context.Docente.Any(e => e.Id == id);
         }
     }
 }

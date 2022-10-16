@@ -10,7 +10,7 @@ namespace LICEORURALJASMINEZB.Models
     public class NivelDetalle
     {
         [Key]
-        public int IdNivelDetalle { get; set; }
+        public int Id { get; set; }
         public int IdNivel { get; set; }
         [ForeignKey("IdNivel")]
         public virtual Nivel Nivel { get; set; }

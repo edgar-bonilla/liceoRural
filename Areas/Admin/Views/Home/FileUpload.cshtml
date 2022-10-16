@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "FileUpload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>FileUpload</h1>
+
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="FileUpload">
+    <div class="form-group">
+
+        <div class="col-md-8">
+            <p>Upload File  </p>
+            <input type="file" name="file" />
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Upload File" />
+    </div>
+    <div class="form-group">
+       <span>@TempData["msg"]</span>
+    </div>
+</form>

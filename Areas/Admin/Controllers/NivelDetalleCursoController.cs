@@ -40,7 +40,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 .Include(n => n.GradoSeccion)
                 .Include(n => n.Nivel)
                 .Include(n => n.NivelDetalle)
-                .FirstOrDefaultAsync(m => m.IdNivelDetalleCurso == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (nivelDetalleCurso == null)
             {
                 return NotFound();
@@ -106,7 +106,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdNivelDetalleCurso,IdNivelDetalle,IdNivel,IdGradoSeccion,IdCurso")] NivelDetalleCurso nivelDetalleCurso)
         {
-            if (id != nivelDetalleCurso.IdNivelDetalleCurso)
+            if (id != nivelDetalleCurso.Id)
             {
                 return NotFound();
             }
@@ -120,7 +120,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NivelDetalleCursoExists(nivelDetalleCurso.IdNivelDetalleCurso))
+                    if (!NivelDetalleCursoExists(nivelDetalleCurso.Id))
                     {
                         return NotFound();
                     }
@@ -151,7 +151,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 .Include(n => n.GradoSeccion)
                 .Include(n => n.Nivel)
                 .Include(n => n.NivelDetalle)
-                .FirstOrDefaultAsync(m => m.IdNivelDetalleCurso == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (nivelDetalleCurso == null)
             {
                 return NotFound();
@@ -173,7 +173,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
         private bool NivelDetalleCursoExists(int id)
         {
-            return _context.NivelDetalleCurso.Any(e => e.IdNivelDetalleCurso == id);
+            return _context.NivelDetalleCurso.Any(e => e.Id== id);
         }
     }
 }

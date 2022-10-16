@@ -4,9 +4,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<br />
 <div class="container">
-    <h1>Index</h1>
+    <div>
+        <div>
+            <h3><strong>Lista de Docentes</strong></h3>
+        </div>
+    </div>
+    <br />
     <div class="row">
 
         <div class="col-6">
@@ -66,7 +71,15 @@
                         @Html.DisplayFor(modelItem => item.FechaNacimiento)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Sexo)
+                        @if (item.Estado == "1")
+                        {
+                            <p>F</p>
+                        }
+                        @if (item.Estado == "2")
+
+                        {
+                            <p>M</p>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Ciudad)
@@ -88,7 +101,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.FechaRegistro)
                     </td>
-                    <td style="width:150px;"><partial name="_TableButtonPartial" model="item.IdDocente" /></td>
+                    <td style="width:150px;"><partial name="_TableButtonPartial" model="item.Id" /></td>
                 </tr>
             }
         </tbody>
@@ -97,6 +110,6 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-  
-   
+
+
 }

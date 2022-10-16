@@ -10,17 +10,26 @@ namespace LICEORURALJASMINEZB.Models
     public class Matricula
     {
         [Key]
-        public int IdMatricula { get; set; }
-        public int IdNivelDetalleCurso { get; set; }
-        [ForeignKey(" IdNivelDetalleCurso")]
-        public virtual NivelDetalleCurso NivelDetalleCurso { get; set; }
-
+        public int Id { get; set; }
+        public int IdPeriodo { get; set; }
+        [ForeignKey(" IdPeriodo")]
+        public virtual Periodo Periodo { get; set; }
+        public int IdCurso { get; set; }
+    
+        [ForeignKey("CursoId")]
+        public virtual Curso Curso { get; set; }
         public int IdAlumno { get; set; }
         [ForeignKey("IdAlumno")]
         public virtual Alumno Alumno { get; set; }
-        public int IdNivelDetalle { get; set; }
-        [ForeignKey(" IdNivelDetalle ")]
-        public virtual NivelDetalle NivelDetalle { get; set; }
+        public int IdNivel { get; set; }
+        [ForeignKey(" IdNivel ")]
+        public virtual Nivel Nivel { get; set; }
+        public int IdEncargado { get; set; }
+        [ForeignKey(" IdEncargado")]
+        public virtual Encargado Encargado { get; set; }
+        public string InstitucionProcedencia  { get; set; }
 
+        public string EstadoAlumno  { get; set; }
+        public enum IsEstadoAlumno { Nuevo = 1, Antiguo = 2 }
     }
 }

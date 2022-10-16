@@ -4,85 +4,89 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <h1>Create</h1>
 
-<h1>Create</h1>
+    <h4>Docente</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="DocumentoIdentidad" class="control-label"></label>
+                    <input asp-for="DocumentoIdentidad" class="form-control" />
+                    <span asp-validation-for="DocumentoIdentidad" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nombres" class="control-label"></label>
+                    <input asp-for="Nombres" class="form-control" />
+                    <span asp-validation-for="Nombres" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apellidos" class="control-label"></label>
+                    <input asp-for="Apellidos" class="form-control" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaNacimiento" class="control-label"></label>
+                    <input asp-for="FechaNacimiento" class="form-control" />
+                    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div >
+                        <label asp-for="Sexo" class="col-form-label"></label>
+                    </div>
+                    <div>
+                        <select asp-for="Sexo" asp-items="Html.GetEnumSelectList<Docente.IsSexo>()"
+                                class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ciudad" class="control-label"></label>
+                    <input asp-for="Ciudad" class="form-control" />
+                    <span asp-validation-for="Ciudad" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Direccion" class="control-label"></label>
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumeroTelefono" class="control-label"></label>
+                    <input asp-for="NumeroTelefono" class="form-control" />
+                    <span asp-validation-for="NumeroTelefono" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="col-4">
+                        <label asp-for="Estado" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <select asp-for="Estado" asp-items="Html.GetEnumSelectList<Docente.IsEstado>()"
+                                class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaRegistro" class="control-label"></label>
+                    <input asp-for="FechaRegistro" class="form-control" />
+                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
 
-<h4>Docente</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DocumentoIdentidad" class="control-label"></label>
-                <input asp-for="DocumentoIdentidad" class="form-control" />
-                <span asp-validation-for="DocumentoIdentidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apellidos" class="control-label"></label>
-                <input asp-for="Apellidos" class="form-control" />
-                <span asp-validation-for="Apellidos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaNacimiento" class="control-label"></label>
-                <input asp-for="FechaNacimiento" class="form-control" />
-                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Sexo" class="control-label"></label>
-                <input asp-for="Sexo" class="form-control" />
-                <span asp-validation-for="Sexo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ciudad" class="control-label"></label>
-                <input asp-for="Ciudad" class="form-control" />
-                <span asp-validation-for="Ciudad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumeroTelefono" class="control-label"></label>
-                <input asp-for="NumeroTelefono" class="form-control" />
-                <span asp-validation-for="NumeroTelefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="col-4">
-                    <label asp-for="Estado" class="col-form-label"></label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="Estado" asp-items="Html.GetEnumSelectList<Docente.IsEstado>()"
-                            class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

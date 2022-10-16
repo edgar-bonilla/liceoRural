@@ -9,7 +9,7 @@ namespace LICEORURALJASMINEZB.Models
     public class Curso
     {
         [Key]
-        public int IdCurso { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Curso")]
         public string NombreCurso { get; set; }

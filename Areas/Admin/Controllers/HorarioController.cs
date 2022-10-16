@@ -37,7 +37,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
             var horario = await _context.Horario
                 .Include(h => h.NivelDetalleCurso)
-                .FirstOrDefaultAsync(m => m.IdHorario == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (horario == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdHorario,IdNivelDetalleCurso,DiaSemana,HoraInicio,HoraFin,Estado")] Horario horario)
         {
-            if (id != horario.IdHorario)
+            if (id != horario.Id)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HorarioExists(horario.IdHorario))
+                    if (!HorarioExists(horario.Id))
                     {
                         return NotFound();
                     }
@@ -133,7 +133,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
             var horario = await _context.Horario
                 .Include(h => h.NivelDetalleCurso)
-                .FirstOrDefaultAsync(m => m.IdHorario == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (horario == null)
             {
                 return NotFound();
@@ -155,7 +155,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
         private bool HorarioExists(int id)
         {
-            return _context.Horario.Any(e => e.IdHorario == id);
+            return _context.Horario.Any(e => e.Id == id);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
             var calificacion = await _context.Calificacion
                 .Include(c => c.Alumno)
                 .Include(c => c.Concentrado)
-                .FirstOrDefaultAsync(m => m.IdCalificacion == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (calificacion == null)
             {
                 return NotFound();
@@ -98,7 +98,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdCalificacion,IdConcentrado,IdAlumno,Nota")] Calificacion calificacion)
         {
-            if (id != calificacion.IdCalificacion)
+            if (id != calificacion.Id)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CalificacionExists(calificacion.IdCalificacion))
+                    if (!CalificacionExists(calificacion.Id))
                     {
                         return NotFound();
                     }
@@ -139,7 +139,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
             var calificacion = await _context.Calificacion
                 .Include(c => c.Alumno)
                 .Include(c => c.Concentrado)
-                .FirstOrDefaultAsync(m => m.IdCalificacion == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (calificacion == null)
             {
                 return NotFound();
@@ -161,7 +161,7 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
 
         private bool CalificacionExists(int id)
         {
-            return _context.Calificacion.Any(e => e.IdCalificacion == id);
+            return _context.Calificacion.Any(e => e.Id == id);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace LICEORURALJASMINEZB.Models
     public class Concentrado
     {
         [Key]
-        public int IdConcentrado { get; set; }
+        public int Id { get; set; }
 
         public int IdDocenteNivelDetalleCurso { get; set; }
         public string Descripcion { get; set; }

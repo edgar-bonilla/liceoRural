@@ -10,7 +10,7 @@ namespace LICEORURALJASMINEZB.Models
     public class Docente
     {
         [Key]
-        public int IdDocente { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Cedula")]
         public string DocumentoIdentidad { get; set; }
@@ -28,6 +28,7 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Sexo")]
         public string Sexo { get; set; }
+        public enum IsSexo { Femenino = 1, Masculino = 2 }
         [Required]
         [Display(Name = "Ciudad")]
         public string Ciudad { get; set; }

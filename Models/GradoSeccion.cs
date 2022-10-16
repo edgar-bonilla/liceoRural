@@ -10,7 +10,7 @@ namespace LICEORURALJASMINEZB.Models
     public class GradoSeccion
     {
         [Key]
-        public int IdGradoSeccion { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Grado")]
         public string DescripcionGrado { get; set; }
@@ -20,6 +20,7 @@ namespace LICEORURALJASMINEZB.Models
         public string Estado { get; set; }
         public enum estado { Activo = 0, Inactivo = 1 }
         [NotMapped]
+        public bool Asignado { get; set; }
         public List<Curso> ListaCurso { get; set; }
     }
 }

@@ -32,21 +32,21 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NivelDetalle.IdNivelDetalle)
+                @Html.DisplayFor(modelItem => item.NivelDetalle.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nivel.IdNivel)
+                @Html.DisplayFor(modelItem => item.Nivel.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GradoSeccion.IdGradoSeccion)
+                @Html.DisplayFor(modelItem => item.GradoSeccion.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Curso.Estado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdNivelDetalleCurso">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdNivelDetalleCurso">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdNivelDetalleCurso">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

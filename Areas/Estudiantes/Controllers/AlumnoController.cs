@@ -7,142 +7,49 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LICEORURALJASMINEZB.Data;
 using LICEORURALJASMINEZB.Models;
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
 
 namespace LICEORURALJASMINEZB.Areas.Estudiantes.Controllers
 {
     [Area("Estudiantes")]
     public class AlumnoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
-        public AlumnoController(ApplicationDbContext context)
+        public AlumnoController(IUnidadTrabajo unidadTrabajo)
         {
-            _context = context;
+            _unidadTrabajo = unidadTrabajo;
         }
 
-        // GET: Estudiantes/Alumno
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Alumno.ToListAsync());
-        }
 
-        // GET: Estudiantes/Alumno/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var alumno = await _context.Alumno
-                .FirstOrDefaultAsync(m => m.IdAlumno == id);
-            if (alumno == null)
-            {
-                return NotFound();
-            }
-
-            return View(alumno);
-        }
-
-        // GET: Estudiantes/Alumno/Create
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAlumno,Nombres,Apellidos,DocumentoIdentidad,FechaNacimiento,Sexo,Ciudad,Direccion,Correo,Telefono,Estado,FechaRegistro")] Alumno alumno)
+
+
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(alumno);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(alumno);
+            var todos = _unidadTrabajo.Alumno.ObtenerTodos();
+            return Json(new { data = todos });
         }
 
-        // GET: Estudiantes/Alumno/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
-            if (id == null)
+            var alumnoDb = _unidadTrabajo.Alumno.Obtener(id);
+            if (alumnoDb == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error al Borrar" });
             }
-
-            var alumno = await _context.Alumno.FindAsync(id);
-            if (alumno == null)
-            {
-                return NotFound();
-            }
-            return View(alumno);
+            _unidadTrabajo.Alumno.Remover(alumnoDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Curso Borrada Exitosamente" });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdAlumno,Nombres,Apellidos,DocumentoIdentidad,FechaNacimiento,Sexo,Ciudad,Direccion,Correo,Telefono,Estado,FechaRegistro")] Alumno alumno)
-        {
-            if (id != alumno.IdAlumno)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(alumno);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AlumnoExists(alumno.IdAlumno))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(alumno);
-        }
-
-        // GET: Estudiantes/Alumno/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var alumno = await _context.Alumno
-                .FirstOrDefaultAsync(m => m.IdAlumno == id);
-            if (alumno == null)
-            {
-                return NotFound();
-            }
-
-            return View(alumno);
-        }
-
-        // POST: Estudiantes/Alumno/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var alumno = await _context.Alumno.FindAsync(id);
-            _context.Alumno.Remove(alumno);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool AlumnoExists(int id)
-        {
-            return _context.Alumno.Any(e => e.IdAlumno == id);
-        }
+        #endregion
     }
 }

@@ -26,6 +26,11 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             return View(await _context.Periodo.ToListAsync());
         }
 
+        public JsonResult Listar()
+        {
+            var data = _context.Periodo.ToList();
+            return new JsonResult(data);
+        }
         // GET: Admin/Periodo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -35,7 +40,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             }
 
             var periodo = await _context.Periodo
-                .FirstOrDefaultAsync(m => m.IdPeriodo == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (periodo == null)
             {
                 return NotFound();
@@ -89,7 +94,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdPeriodo,Descripcion,FechaInicio,FechaFin,Estado")] Periodo periodo)
         {
-            if (id != periodo.IdPeriodo)
+            if (id != periodo.Id)
             {
                 return NotFound();
             }
@@ -103,7 +108,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PeriodoExists(periodo.IdPeriodo))
+                    if (!PeriodoExists(periodo.Id))
                     {
                         return NotFound();
                     }
@@ -126,7 +131,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             }
 
             var periodo = await _context.Periodo
-                .FirstOrDefaultAsync(m => m.IdPeriodo == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (periodo == null)
             {
                 return NotFound();
@@ -148,7 +153,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
         private bool PeriodoExists(int id)
         {
-            return _context.Periodo.Any(e => e.IdPeriodo == id);
+            return _context.Periodo.Any(e => e.Id == id);
         }
     }
 }

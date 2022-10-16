@@ -16,13 +16,13 @@
             @Html.DisplayNameFor(model => model.Nivel)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nivel.IdNivel)
+            @Html.DisplayFor(model => model.Nivel.Id)
         </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.GradoSeccion)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GradoSeccion.IdGradoSeccion)
+            @Html.DisplayFor(model => model.GradoSeccion.Id)
         </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TotalVacantes)
@@ -51,7 +51,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdNivelDetalle" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

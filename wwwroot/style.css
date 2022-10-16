@@ -952,8 +952,8 @@ a img.aligncenter {
         top: 0px;
         left: 0px;
         display: block;
-        background: #000000;
-        );
+      /*  background: #000000;*/
+       
     }
 
     .first-section h2 {

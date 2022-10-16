@@ -13,10 +13,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NivelDetalleCurso)
+            @Html.DisplayNameFor(model => model.Periodo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NivelDetalleCurso.IdNivelDetalleCurso)
+            @Html.DisplayFor(model => model.Periodo.Descripcion)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Curso)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Curso.Descripcion)
         </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Alumno)
@@ -25,15 +31,15 @@
             @Html.DisplayFor(model => model.Alumno.Apellidos)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NivelDetalle)
+            @Html.DisplayNameFor(model => model.Nivel)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NivelDetalle.IdNivelDetalle)
+            @Html.DisplayFor(model => model.Nivel.DescripcionNivel)
         </dd class>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdMatricula" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

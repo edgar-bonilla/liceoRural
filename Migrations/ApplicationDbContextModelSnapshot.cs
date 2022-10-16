@@ -15,13 +15,13 @@ namespace LICEORURALJASMINEZB.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.25")
+                .HasAnnotation("ProductVersion", "3.1.30")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Alumno", b =>
                 {
-                    b.Property<int>("IdAlumno")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -69,14 +69,14 @@ namespace LICEORURALJASMINEZB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdAlumno");
+                    b.HasKey("Id");
 
                     b.ToTable("Alumno");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Calificacion", b =>
                 {
-                    b.Property<int>("IdCalificacion")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -90,7 +90,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<float>("Nota")
                         .HasColumnType("real");
 
-                    b.HasKey("IdCalificacion");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdAlumno");
 
@@ -101,7 +101,7 @@ namespace LICEORURALJASMINEZB.Migrations
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Concentrado", b =>
                 {
-                    b.Property<int>("IdConcentrado")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -115,7 +115,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<int>("IdDocenteNivelDetalleCurso")
                         .HasColumnType("int");
 
-                    b.HasKey("IdConcentrado");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdDocenteCurso");
 
@@ -124,7 +124,7 @@ namespace LICEORURALJASMINEZB.Migrations
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Curso", b =>
                 {
-                    b.Property<int>("IdCurso")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -137,18 +137,23 @@ namespace LICEORURALJASMINEZB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("GradoSeccionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NombreCurso")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdCurso");
+                    b.HasKey("Id");
+
+                    b.HasIndex("GradoSeccionId");
 
                     b.ToTable("Curso");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Docente", b =>
                 {
-                    b.Property<int>("IdDocente")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -196,14 +201,14 @@ namespace LICEORURALJASMINEZB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdDocente");
+                    b.HasKey("Id");
 
                     b.ToTable("Docente");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.DocenteCurso", b =>
                 {
-                    b.Property<int>("IdDocenteCurso")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -218,7 +223,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<int>("IdNivelDetalleCurso")
                         .HasColumnType("int");
 
-                    b.HasKey("IdDocenteCurso");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdDocente");
 
@@ -229,7 +234,7 @@ namespace LICEORURALJASMINEZB.Migrations
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Encargado", b =>
                 {
-                    b.Property<int>("IdEncargado")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -253,7 +258,7 @@ namespace LICEORURALJASMINEZB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Estadoi")
+                    b.Property<string>("EstadoCivil")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaRegistro")
@@ -263,18 +268,18 @@ namespace LICEORURALJASMINEZB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NumeroTelefono")
+                    b.Property<string>("TipoRelacion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdEncargado");
+                    b.HasKey("Id");
 
                     b.ToTable("encargado");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.GradoSeccion", b =>
                 {
-                    b.Property<int>("IdGradoSeccion")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -290,14 +295,14 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdGradoSeccion");
+                    b.HasKey("Id");
 
                     b.ToTable("GradoSeccion");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Horario", b =>
                 {
-                    b.Property<int>("IdHorario")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -320,76 +325,77 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<int>("IdNivelDetalleCurso")
                         .HasColumnType("int");
 
-                    b.HasKey("IdHorario");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdNivelDetalleCurso");
 
                     b.ToTable("Horario");
                 });
 
-            modelBuilder.Entity("LICEORURALJASMINEZB.Models.Matricula", b =>
+            modelBuilder.Entity("LICEORURALJASMINEZB.Models.Imagen", b =>
                 {
-                    b.Property<int>("IdMatricula")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Apellidos")
-                        .IsRequired()
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Ciudad")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.ToTable("image");
+                });
 
-                    b.Property<string>("DocumentoIdentidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            modelBuilder.Entity("LICEORURALJASMINEZB.Models.Matricula", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CursoId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Estadoi")
+                    b.Property<string>("EstadoAlumno")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("FechaRegistro")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("IdAlumno")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdNivelDetalle")
+                    b.Property<int>("IdCurso")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdNivelDetalleCurso")
+                    b.Property<int>("IdEncargado")
                         .HasColumnType("int");
 
-                    b.Property<string>("Nombres")
-                        .IsRequired()
+                    b.Property<int>("IdNivel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPeriodo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InstitucionProcedencia")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NumeroTelefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Id");
 
-                    b.HasKey("IdMatricula");
+                    b.HasIndex("CursoId");
 
                     b.HasIndex("IdAlumno");
 
-                    b.HasIndex("IdNivelDetalle");
+                    b.HasIndex("IdEncargado");
 
-                    b.HasIndex("IdNivelDetalleCurso");
+                    b.HasIndex("IdNivel");
+
+                    b.HasIndex("IdPeriodo");
 
                     b.ToTable("Matricula");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Menu", b =>
                 {
-                    b.Property<int>("IdMenu")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -435,14 +441,14 @@ namespace LICEORURALJASMINEZB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdMenu");
+                    b.HasKey("Id");
 
                     b.ToTable("Menu");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Nivel", b =>
                 {
-                    b.Property<int>("IdNivel")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -468,7 +474,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<int>("IdPeriodo")
                         .HasColumnType("int");
 
-                    b.HasKey("IdNivel");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdPeriodo");
 
@@ -477,7 +483,7 @@ namespace LICEORURALJASMINEZB.Migrations
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.NivelDetalle", b =>
                 {
-                    b.Property<int>("IdNivelDetalle")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -500,7 +506,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<int>("VacantesOcupadas")
                         .HasColumnType("int");
 
-                    b.HasKey("IdNivelDetalle");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdGradoSeccion");
 
@@ -511,7 +517,7 @@ namespace LICEORURALJASMINEZB.Migrations
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.NivelDetalleCurso", b =>
                 {
-                    b.Property<int>("IdNivelDetalleCurso")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -528,7 +534,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<int>("IdNivelDetalle")
                         .HasColumnType("int");
 
-                    b.HasKey("IdNivelDetalleCurso");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdCurso");
 
@@ -543,7 +549,7 @@ namespace LICEORURALJASMINEZB.Migrations
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Periodo", b =>
                 {
-                    b.Property<int>("IdPeriodo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -563,14 +569,14 @@ namespace LICEORURALJASMINEZB.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.HasKey("IdPeriodo");
+                    b.HasKey("Id");
 
                     b.ToTable("Periodo");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.SubMenu", b =>
                 {
-                    b.Property<int>("IdSubMenu")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -587,7 +593,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<string>("NombreFormulario")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdSubMenu");
+                    b.HasKey("Id");
 
                     b.ToTable("SubMenu");
                 });
@@ -823,13 +829,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Alumno", "Alumno")
                         .WithMany()
                         .HasForeignKey("IdAlumno")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Concentrado", "Concentrado")
                         .WithMany()
                         .HasForeignKey("IdConcentrado")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -838,8 +844,15 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.DocenteCurso", "DocenteCurso")
                         .WithMany()
                         .HasForeignKey("IdDocenteCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LICEORURALJASMINEZB.Models.Curso", b =>
+                {
+                    b.HasOne("LICEORURALJASMINEZB.Models.GradoSeccion", null)
+                        .WithMany("ListaCurso")
+                        .HasForeignKey("GradoSeccionId");
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.DocenteCurso", b =>
@@ -847,13 +860,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Docente", "Docente")
                         .WithMany()
                         .HasForeignKey("IdDocente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalleCurso", "NivelDetalleCurso")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalleCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -862,28 +875,38 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalleCurso", "NivelDetalleCurso")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalleCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Matricula", b =>
                 {
+                    b.HasOne("LICEORURALJASMINEZB.Models.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("CursoId");
+
                     b.HasOne("LICEORURALJASMINEZB.Models.Alumno", "Alumno")
                         .WithMany()
                         .HasForeignKey("IdAlumno")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalle", "NivelDetalle")
+                    b.HasOne("LICEORURALJASMINEZB.Models.Encargado", "Encargado")
                         .WithMany()
-                        .HasForeignKey("IdNivelDetalle")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IdEncargado")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalleCurso", "NivelDetalleCurso")
+                    b.HasOne("LICEORURALJASMINEZB.Models.Nivel", "Nivel")
                         .WithMany()
-                        .HasForeignKey("IdNivelDetalleCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IdNivel")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("LICEORURALJASMINEZB.Models.Periodo", "Periodo")
+                        .WithMany()
+                        .HasForeignKey("IdPeriodo")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -892,7 +915,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Periodo", "Periodo")
                         .WithMany()
                         .HasForeignKey("IdPeriodo")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -901,13 +924,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.GradoSeccion", "GradoSeccion")
                         .WithMany()
                         .HasForeignKey("IdGradoSeccion")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Nivel", "Nivel")
                         .WithMany()
                         .HasForeignKey("IdNivel")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -916,25 +939,25 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Curso", "Curso")
                         .WithMany()
                         .HasForeignKey("IdCurso")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.GradoSeccion", "GradoSeccion")
                         .WithMany()
                         .HasForeignKey("IdGradoSeccion")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Nivel", "Nivel")
                         .WithMany()
                         .HasForeignKey("IdNivel")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.NivelDetalle", "NivelDetalle")
                         .WithMany()
                         .HasForeignKey("IdNivelDetalle")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -943,7 +966,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -952,7 +975,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -961,7 +984,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -970,13 +993,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -985,7 +1008,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -11,6 +11,10 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="  https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link href="~/style.css" rel="stylesheet" />
     <link href="~/css/superslides.css" rel="stylesheet" />
     @await RenderSectionAsync("Styles", required: false)
@@ -51,7 +55,7 @@
                                 <a class="dropdown-item" asp-action="Index"
                                    asp-controller="GradoSeccion" asp-area="Admin">Crear grados y secciones</a>
                                 <a class="dropdown-item" asp-action="Index"
-                                   asp-controller="SubCategory" asp-area="Admin">Asignar grados por Niveles </a>
+                                   asp-controller="GradoporNivel" asp-area="Admin">Asignar grados por Niveles </a>
                                 <a class="dropdown-item" asp-action="Index"
                                    asp-controller="SubCategory" asp-area="Admin">Cursos por Niveles</a>
                                 <a class="dropdown-item" asp-action="Index"
@@ -171,7 +175,7 @@
         <div class="container">
             <div class="footer-distributed">
                 <div class="footer-center">
-                    <p class="footer-company-name">Todos los Reservados. &copy; 2022 <a href="#">SmartEDU</a> Design By : <a href="https://html.design/">html design</a></p>
+                    <p class="footer-company-name">Todos los Reservados. &copy; 2022 <a href="#">Liceo Rural Jazmines B</a> Design By : <a href="https://html.design/">Edgar Bonilla</a></p>
                 </div>
             </div>
         </div><!-- end container -->
@@ -183,11 +187,9 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="~/js/jquery/DataTable.js"></script>
-<script src="~/js/jquery.superslides.js" asp-append-version="true"></script>
 <script src="~/js/jquery/All.js"></script>
 <script src="~/js/custom.js"></script>
-@RenderSection("Scripts", required: false)
+@*<script src="~/js/jquery/DataTable.js"></script>*@
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -195,11 +197,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-<script>
-    timeline(document.querySelectorAll('.timeline'), {
-        forceVerticalMode: 700,
-        mode: 'horizontal',
-        verticalStartPosition: 'left',
-        visibleItems: 4
-    });
-</script>
+
+@RenderSection("Scripts", required: false)
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="~/Plugins/sweetalert2/js/sweetalert.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://kit.fontawesome.com/e19c476714.js"></script>
+

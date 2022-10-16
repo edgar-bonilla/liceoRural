@@ -44,31 +44,27 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Periodo.Descripcion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DescripcionNivel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DescripcionTurno)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HoraInicio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HoraFin)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.IdNivel">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.IdNivel">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.IdNivel">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Periodo.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionNivel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescripcionTurno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraFin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td style="width:150px;"><partial name="_TableButtonPartial" model="item.Id" /></td>
+            </tr>
             }
         </tbody>
     </table>
@@ -85,7 +81,7 @@
             $('#tabla').DataTable({
                 dom: 'Blfrtip',
                 buttons: [
-                    'excel', 'pdf', 'print'
+    
                 ],
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"

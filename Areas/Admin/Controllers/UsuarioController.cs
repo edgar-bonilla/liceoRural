@@ -162,12 +162,12 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            var user = await _contexto.Users.FindAsync(id);
+            var user = await _contexto.ApplicationUser.FindAsync(id);
             if (user == null)
             {
                 return View();
             }
-            _contexto.Users.Remove(user);
+            _contexto.ApplicationUser.Remove(user);
             await _contexto.SaveChangesAsync();
             TempData["Correcto"] = "Usuario borrado correctamente";
             return RedirectToAction(nameof(Index));

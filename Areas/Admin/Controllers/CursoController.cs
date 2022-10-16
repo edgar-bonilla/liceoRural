@@ -7,144 +7,89 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LICEORURALJASMINEZB.Data;
 using LICEORURALJASMINEZB.Models;
-
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
 
 namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CursoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
-        public CursoController(ApplicationDbContext context)
+        public CursoController(IUnidadTrabajo unidadTrabajo)
         {
-            _context = context;
+            _unidadTrabajo = unidadTrabajo;
         }
 
-        // GET: Admin/Curso
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Curso.ToListAsync());
-        }
-    
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var curso = await _context.Curso
-                .FirstOrDefaultAsync(m => m.IdCurso == id);
-            if (curso == null)
-            {
-                return NotFound();
-            }
-
-            return View(curso);
-        }
-
-    
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
 
+
+        public IActionResult Upsert(int? id)
+        {
+            Curso bodega = new Curso();
+            if (id == null)
+            {
+                // Esto es para Crear nuevo Registro
+                return View(bodega);
+            }
+            // Esto es para Actualizar
+            bodega = _unidadTrabajo.Curso.Obtener(id.GetValueOrDefault());
+            if (bodega == null)
+            {
+                return NotFound();
+            }
+
+            return View(bodega);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCurso,NombreCurso,Descripcion,Estado")] Curso curso)
+        public IActionResult Upsert(Curso bodega)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(curso);
-                await _context.SaveChangesAsync();
+                if (bodega.Id == 0)
+                {
+                    _unidadTrabajo.Curso.Agregar(bodega);
+                }
+                else
+                {
+                    _unidadTrabajo.Curso.Actualizar(bodega);
+                }
+                _unidadTrabajo.Guardar();
                 return RedirectToAction(nameof(Index));
             }
-            return View(curso);
+            return View(bodega);
         }
 
-        // GET: Admin/Curso/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var curso = await _context.Curso.FindAsync(id);
-            if (curso == null)
-            {
-                return NotFound();
-            }
-            return View(curso);
+            var todos = _unidadTrabajo.Curso.ObtenerTodos();
+            return Json(new { data = todos });
         }
 
-  
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCurso,NombreCurso,Descripcion,Estado")] Curso curso)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
-            if (id != curso.IdCurso)
+            var bodegaDb = _unidadTrabajo.Curso.Obtener(id);
+            if (bodegaDb == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error al Borrar" });
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(curso);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CursoExists(curso.IdCurso))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(curso);
+            _unidadTrabajo.Curso.Remover(bodegaDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Curso Borrada Exitosamente" });
         }
 
-        // GET: Admin/Curso/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var curso = await _context.Curso
-                .FirstOrDefaultAsync(m => m.IdCurso == id);
-            if (curso == null)
-            {
-                return NotFound();
-            }
-
-            return View(curso);
-        }
-
-        // POST: Admin/Curso/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var curso = await _context.Curso.FindAsync(id);
-            _context.Curso.Remove(curso);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CursoExists(int id)
-        {
-            return _context.Curso.Any(e => e.IdCurso == id);
-        }
+        #endregion
     }
-  
+
 }

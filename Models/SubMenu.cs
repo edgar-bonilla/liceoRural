@@ -9,7 +9,7 @@ namespace LICEORURALJASMINEZB.Models
     public class SubMenu
     {
         [Key]
-        public int IdSubMenu { get; set; }
+        public int Id { get; set; }
 
         public int IdMenu { get; set; }
         public string Nombre { get; set; }

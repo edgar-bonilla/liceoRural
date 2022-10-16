@@ -11,7 +11,7 @@ namespace LICEORURALJASMINEZB.Models
     public class Horario
     {
         [Key]
-        public int IdHorario { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Detalle Curso  ")]
         public int IdNivelDetalleCurso { get; set; }
@@ -20,6 +20,7 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Dia Semana  ")]
         public string DiaSemana { get; set; }
+        public enum IsDiaSemana { Lunes,Martes,Miercoles,Jueves,Viernes }
         [Required]
         [Display(Name = "Fecha inicio")]
         [DataType(DataType.Date)]

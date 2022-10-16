@@ -38,7 +38,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             var nivelDetalle = await _context.NivelDetalle
                 .Include(n => n.GradoSeccion)
                 .Include(n => n.Nivel)
-                .FirstOrDefaultAsync(m => m.IdNivelDetalle == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (nivelDetalle == null)
             {
                 return NotFound();
@@ -98,7 +98,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdNivelDetalle,IdNivel,IdGradoSeccion,TotalVacantes,VacantesDisponibles,VacantesOcupadas,Estado")] NivelDetalle nivelDetalle)
         {
-            if (id != nivelDetalle.IdNivelDetalle)
+            if (id != nivelDetalle.Id)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NivelDetalleExists(nivelDetalle.IdNivelDetalle))
+                    if (!NivelDetalleExists(nivelDetalle.Id))
                     {
                         return NotFound();
                     }
@@ -139,7 +139,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             var nivelDetalle = await _context.NivelDetalle
                 .Include(n => n.GradoSeccion)
                 .Include(n => n.Nivel)
-                .FirstOrDefaultAsync(m => m.IdNivelDetalle == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (nivelDetalle == null)
             {
                 return NotFound();
@@ -161,7 +161,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 
         private bool NivelDetalleExists(int id)
         {
-            return _context.NivelDetalle.Any(e => e.IdNivelDetalle == id);
+            return _context.NivelDetalle.Any(e => e.Id == id);
         }
     }
 }

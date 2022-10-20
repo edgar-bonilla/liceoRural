@@ -1,115 +1,55 @@
 ﻿@model IEnumerable<LICEORURALJASMINEZB.Models.Docente>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Alumno";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
+
+<br />
 <div class="container">
-    <div>
-        <div>
-            <h3><strong>Lista de Docentes</strong></h3>
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <div class="card">
+                <div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h1 class="font-weight-bold" style="color:darkorange">Lista de Docentes</h1>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary" asp-action="Upsert"> <i class="fas fa-plus"></i> Crear Docente </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="tblDato" class="display" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="font-weight: bold">Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Cedula</th>
+                                 <th>Telefono</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Sexo</th>
+                                <th>Ciudad</th>
+                                <th>Estado</th>
+                                <th>Acciones </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+            </div>
+
         </div>
     </div>
-    <br />
-    <div class="row">
 
-        <div class="col-6">
-
-        </div>
-        <div class="col-6 text-right">
-            <partial name="_CreatePartialButton" />
-        </div>
-    </div>
-    <table id="example" class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DocumentoIdentidad)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombres)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Apellidos)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaNacimiento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sexo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ciudad)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NumeroTelefono)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaRegistro)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DocumentoIdentidad)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombres)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Apellidos)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaNacimiento)
-                    </td>
-                    <td>
-                        @if (item.Estado == "1")
-                        {
-                            <p>F</p>
-                        }
-                        @if (item.Estado == "2")
-
-                        {
-                            <p>M</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Ciudad)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NumeroTelefono)
-                    </td>
-                    <td>
-                        @if (item.Estado == "1")
-                        {
-                            <p>Activo</p>
-                        }
-                        @if (item.Estado == "2")
-
-                        {
-                            <p>Inactivo</p>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaRegistro)
-                    </td>
-                    <td style="width:150px;"><partial name="_TableButtonPartial" model="item.Id" /></td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </div>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-
-
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+  <script src="~/scripts/docente.js"></script>
 }
+

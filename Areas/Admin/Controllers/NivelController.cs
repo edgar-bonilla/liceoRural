@@ -1,161 +1,115 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using LICEORURALJASMINEZB.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using LICEORURALJASMINEZB.Models;
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
+using LICEORURALJASMINEZB.Models.ViewModels;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class NivelController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
-        public NivelController(ApplicationDbContext context)
+        public NivelController(IUnidadTrabajo unidadTrabajo)
         {
-            _context = context;
+            _unidadTrabajo = unidadTrabajo;
         }
 
-        // GET: Admin/Nivel
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.Nivel.Include(n => n.Periodo);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
-        // GET: Admin/Nivel/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var nivel = await _context.Nivel
-                .Include(n => n.Periodo)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (nivel == null)
-            {
-                return NotFound();
-            }
-
-            return View(nivel);
-        }
-
-        // GET: Admin/Nivel/Create
-        public IActionResult Create()
-        {
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion");
             return View();
         }
 
-        // POST: Admin/Nivel/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+        public IActionResult Upsert(int? id)
+        {
+            NIvelViewModels nIvelViewModels = new NIvelViewModels()
+            {
+                Nivel = new Nivel(),
+                PeriodoLista = _unidadTrabajo.Periodo.ObtenerTodos().Select(c => new SelectListItem
+                {
+                    Text = c.Descripcion,
+                    Value = c.Id.ToString()
+                }),
+              
+
+            };
+
+
+            if (id == null)
+            {
+                // Esto es para Crear nuevo Registro
+                return View(nIvelViewModels);
+            }
+            // Esto es para Actualizar
+            nIvelViewModels.Nivel = _unidadTrabajo.Nivel.Obtener(id.GetValueOrDefault());
+            if (nIvelViewModels.Nivel == null)
+            {
+                return NotFound();
+            }
+
+            return View(nIvelViewModels);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdNivel,IdPeriodo,DescripcionNivel,DescripcionTurno,HoraInicio,HoraFin,Estado")] Nivel nivel)
+        public IActionResult Upsert(NIvelViewModels nIvelViewModels)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(nivel);
-                await _context.SaveChangesAsync();
+                if (nIvelViewModels.Nivel.Id == 0)
+                {
+                    _unidadTrabajo.Nivel.Agregar(nIvelViewModels.Nivel);
+                }
+                else
+                {
+                    _unidadTrabajo.Nivel.Actualizar(nIvelViewModels.Nivel);
+                }
+                _unidadTrabajo.Guardar();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion", nivel.IdPeriodo);
-            return View(nivel);
-        }
-
-        // GET: Admin/Nivel/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            else
             {
-                return NotFound();
-            }
-
-            var nivel = await _context.Nivel.FindAsync(id);
-            if (nivel == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion", nivel.IdPeriodo);
-            return View(nivel);
-        }
-
-        // POST: Admin/Nivel/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdNivel,IdPeriodo,DescripcionNivel,DescripcionTurno,HoraInicio,HoraFin,Estado")] Nivel nivel)
-        {
-            if (id != nivel.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                nIvelViewModels.PeriodoLista = _unidadTrabajo.Periodo.ObtenerTodos().Select(c => new SelectListItem
                 {
-                    _context.Update(nivel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                    Text = c.Descripcion,
+                    Value = c.Id.ToString()
+                });
+                if (nIvelViewModels.Nivel.Id !=0)
                 {
-                    if (!NivelExists(nivel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    nIvelViewModels.Nivel = _unidadTrabajo.Nivel.Obtener(nIvelViewModels.Nivel.Id);
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion", nivel.IdPeriodo);
-            return View(nivel);
+            return View(nIvelViewModels.Nivel);
         }
 
-        // GET: Admin/Nivel/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
         {
-            if (id == null)
+            var todos = _unidadTrabajo.Nivel.ObtenerTodos(incluirPropiedades: "Periodo");
+            return Json(new { data = todos });
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var niveloDb = _unidadTrabajo.Nivel.Obtener(id);
+            if (niveloDb == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error al Borrar" });
             }
-
-            var nivel = await _context.Nivel
-                .Include(n => n.Periodo)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (nivel == null)
-            {
-                return NotFound();
-            }
-
-            return View(nivel);
+            _unidadTrabajo.Nivel.Remover(niveloDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Nivel Borrado Exitosamente" });
         }
 
-        // POST: Admin/Nivel/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var nivel = await _context.Nivel.FindAsync(id);
-            _context.Nivel.Remove(nivel);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool NivelExists(int id)
-        {
-            return _context.Nivel.Any(e => e.Id == id);
-        }
+        #endregion
     }
+
 }

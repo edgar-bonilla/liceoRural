@@ -19,6 +19,11 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         {
             _context = context;
         }
+        public JsonResult obtenerdata()
+        {
+            var data = _context.DocenteCurso.ToList();
+            return Json(data);
+        }
 
         // GET: Admin/DocenteCurso
         public async Task<IActionResult> Index()

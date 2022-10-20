@@ -36,6 +36,7 @@ namespace LICEORURALJASMINEZB.Models
         [Display(Name = "Direccion")]
         public string Direccion { get; set; }
         [Required]
+        [EmailAddress]
         [Display(Name = "Correo")]
         public string Email { get; set; }
         [Required]
@@ -50,7 +51,7 @@ namespace LICEORURALJASMINEZB.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? FechaRegistro { get; set; }
-        [NotMapped]
-        public List<Nivel> ListaNivel { get; set; }
+       
+      
     }
 }

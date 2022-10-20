@@ -8,6 +8,8 @@ namespace LICEORURALJASMINEZB.Models
 {
     public class Periodo
     {
+       
+
         [Key]
         public int Id { get; set; }
 

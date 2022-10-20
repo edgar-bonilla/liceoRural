@@ -8,10 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using LICEORURALJASMINEZB.Data;
 using LICEORURALJASMINEZB.Models;
 using LICEORURALJASMINEZB.Repositorio.IRepositorio;
+using LICEORURALJASMINEZ.Utilidades;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = DS.Role_Admin)]
     public class CursoController : Controller
     {
         private readonly IUnidadTrabajo _unidadTrabajo;
@@ -26,44 +30,45 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         {
             return View();
         }
+        
 
 
         public IActionResult Upsert(int? id)
         {
-            Curso bodega = new Curso();
+            Curso curso = new Curso();
             if (id == null)
             {
                 // Esto es para Crear nuevo Registro
-                return View(bodega);
+                return View(curso);
             }
             // Esto es para Actualizar
-            bodega = _unidadTrabajo.Curso.Obtener(id.GetValueOrDefault());
-            if (bodega == null)
+            curso = _unidadTrabajo.Curso.Obtener(id.GetValueOrDefault());
+            if (curso == null)
             {
                 return NotFound();
             }
 
-            return View(bodega);
+            return View(curso);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Curso bodega)
+        public IActionResult Upsert(Curso curso)
         {
             if (ModelState.IsValid)
             {
-                if (bodega.Id == 0)
+                if (curso.Id == 0)
                 {
-                    _unidadTrabajo.Curso.Agregar(bodega);
+                    _unidadTrabajo.Curso.Agregar(curso);
                 }
                 else
                 {
-                    _unidadTrabajo.Curso.Actualizar(bodega);
+                    _unidadTrabajo.Curso.Actualizar(curso);
                 }
                 _unidadTrabajo.Guardar();
                 return RedirectToAction(nameof(Index));
             }
-            return View(bodega);
+            return View(curso);
         }
 
 
@@ -79,12 +84,12 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var bodegaDb = _unidadTrabajo.Curso.Obtener(id);
-            if (bodegaDb == null)
+            var cursoDb = _unidadTrabajo.Curso.Obtener(id);
+            if (cursoDb == null)
             {
                 return Json(new { success = false, message = "Error al Borrar" });
             }
-            _unidadTrabajo.Curso.Remover(bodegaDb);
+            _unidadTrabajo.Curso.Remover(cursoDb);
             _unidadTrabajo.Guardar();
             return Json(new { success = true, message = "Curso Borrada Exitosamente" });
         }

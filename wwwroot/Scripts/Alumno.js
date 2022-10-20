@@ -2,7 +2,10 @@
 
 
 $(document).ready(function () {
+  
     loadDataTable();
+
+  
 });
 
 function loadDataTable() {
@@ -46,45 +49,76 @@ function loadDataTable() {
             },
         ],
         "ajax": {
-            "url": "/Admin/Curso/ObtenerTodos"
+            "url": "/Estudiantes/Alumno/ObtenerTodos"
         },
         "columns": [
-            { "data": "nombreCurso", "width": "20%" },
-            { "data": "descripcion", "width": "40%" },
+            { "data": "nombres", },
+            { "data": "apellidos", },
+            { "data": "documentoIdentidad",  },
+            {
+                "data": "fechaNacimiento", "render": function (data) {
+                    var date = new Date(data);
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    return ("0" + day).slice(-2) + "/" + (month.length > 1 ? month : + month) + "/" + date.getFullYear();
+                }, "autoWidth": true,
+               "width": "17%" },
+            {
+                "data": "sexo",
+                "render": function (data) {
+                    if (data == true) {
+                        return "Femenino";
+                    }
+                    else {
+                        return "Masculino";
+                    }
+                }, 
+            },
+            { "data": "ciudad", },
             {
                 "data": "estado",
                 "render": function (data) {
-                    if (data == true) {
+                    if (data == "1") {
                         return "Activo";
                     }
-                    else {
+                    
+                    else if (data == "2") {
                         return "Inactivo";
                     }
-                }, "width": "20%"
+
+                    else {
+                        return "Aplazado";
+                    }
+                }, 
             },
             {
                 "data": "id",
                 "render": function (data) {
                     return `
                         <div class="text-center">
-                            <a href="/Admin/Curso/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                            <a href="/Estudiantes/Alumno/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a onclick=Delete("/Admin/Curso/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                            <a onclick=Delete("/Estudiantes/Alumno/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">                            
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>
                         `;
-                }, "width": "20%"
+                },
+
             }
         ]
+
+
     });
+
 }
 
 
 function Delete(url) {
+
     swal({
-        title: "Esta Seguro que quiere Eliminar el Curso?",
+        title: "Esta Seguro que quiere Eliminar el Alumno?",
         text: "Este Registro no se podra recuperar",
         icon: "warning",
         buttons: true,
@@ -96,7 +130,7 @@ function Delete(url) {
                 url: url,
                 success: function (data) {
                     if (data.success) {
-                        toastr.success(data.message);
+                        swal("Mensaje", "Alumno Eliminado", "success")
                         datatable.ajax.reload();
                     }
                     else {

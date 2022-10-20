@@ -100,7 +100,7 @@ namespace LICEORURALJASMINEZB.Areas.Identity.Pages.Account
 
             Input = new InputModel()
             {
-                ListaRol = _roleManager.Roles.Where(r => r.Name != DS.Role_Alumno).Select(n => n.Name).Select(l => new SelectListItem
+                ListaRol = _roleManager.Roles.Where(r => r.Name != DS.Role_Admin).Select(n => n.Name).Select(l => new SelectListItem
                 {
                     Text = l,
                     Value = l
@@ -151,7 +151,7 @@ namespace LICEORURALJASMINEZB.Areas.Identity.Pages.Account
 
                     if (user.Role == null)
                     {
-                        await _userManager.AddToRoleAsync(user, DS.Role_Alumno);
+                        await _userManager.AddToRoleAsync(user, DS.Role_Admin);
                     }
                     else
                     {

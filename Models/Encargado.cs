@@ -28,10 +28,12 @@ namespace LICEORURALJASMINEZB.Models
         [Display(Name = "Direccion")]
         public string Direccion { get; set; }
         [Required]
+        [EmailAddress]
         [Display(Name = "Correo")]
         public string Email { get; set; }
         [Required]
         [Display(Name = "Telefono")]
+        public string Telefono { get; set; }
         public string TipoRelacion { get; set; }
         public enum IsTipoRelacion { Padre = 0, Madre = 1,Tio=2,Tia = 3,Abuelo = 4,Abuela = 5,Encarcado = 6 }
         [Required]

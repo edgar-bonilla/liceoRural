@@ -1,183 +1,153 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
-using System.Threading.Tasks;
+using LICEORURALJASMINEZB.Models;
+using LICEORURALJASMINEZB.Models.ViewModels;
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using LICEORURALJASMINEZB.Data;
-using LICEORURALJASMINEZB.Models;
 
-namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
+
+namespace SistemaInventario.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
     public class MatriculaController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public MatriculaController(ApplicationDbContext context)
+        private readonly IUnidadTrabajo _unidadTrabajo;
+        public MatriculaController(IUnidadTrabajo unidadTrabajo)
         {
-            _context = context;
-        }
-
-        // GET: Admin/Matricula
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Matricula.Include(m => m.Alumno).Include(m => m.Curso).Include(m => m.Nivel).Include(m => m.Periodo);
-            return View(await applicationDbContext.ToListAsync());
-        }
-        public JsonResult Prueba() {
-
-            var data = _context.Matricula.Include(m => m.Alumno).Include(m => m.Curso).Include(m => m.Nivel).Include(m => m.Periodo).ToList();
-            return new JsonResult(data);
-        
+            _unidadTrabajo = unidadTrabajo;
+          
         }
 
 
-
-        // GET: Admin/Matricula/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Index()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var matricula = await _context.Matricula
-                .Include(m => m.Alumno)
-                .Include(m => m.Curso)
-                .Include(m => m.Nivel)
-                .Include(m => m.Periodo)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (matricula == null)
-            {
-                return NotFound();
-            }
-
-            return View(matricula);
-        }
-    
-        public IActionResult Create()
-        {
-            ViewData["IdAlumno"] = new SelectList(_context.Alumno, "IdAlumno", "Nombres");
-            ViewData["IdCurso"] = new SelectList(_context.Curso, "IdCurso", "Descripcion","NombreCurso");
-            ViewData["IdNivel"] = new SelectList(_context.Nivel, "IdNivel", "DescripcionNivel");
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion");
             return View();
         }
 
-        // POST: Admin/Matricula/Create
+        public IActionResult Upsert(int? id)
+        {
+            MatriculaViewModels matriculaViewModels = new MatriculaViewModels()
+            {
+                Matricula = new Matricula(),
+                PeriodoLista = _unidadTrabajo.Periodo.ObtenerTodos().Select(c => new SelectListItem
+                {
+                    Text = c.Descripcion,
+                    Value = c.Id.ToString()
+                }),
+                AlumnoLista = _unidadTrabajo.Alumno.ObtenerTodos().Select(m => new SelectListItem
+                {
+                    Text = m.Nombres,
+                    Value = m.Id.ToString()
+                }),
+                CursoLista = _unidadTrabajo.Curso.ObtenerTodos().Select(p => new SelectListItem
+                {
+                    Text = p.Descripcion,
+                    Value = p.Id.ToString()
+                }),
+                  EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
+                   {
+                       Text = p.Nombres,
+                       Value = p.Id.ToString()
+                   }),
+                    NivelLista = _unidadTrabajo.Nivel.ObtenerTodos().Select(p => new SelectListItem
+                     {
+                         Text = p.DescripcionTurno,
+                         Value = p.Id.ToString()
+                     })
+            };
+
+
+            if (id == null)
+            {
+                // Esto es para Crear nuevo Registro
+                return View(matriculaViewModels);
+            }
+            // Esto es para Actualizar
+            matriculaViewModels.Matricula = _unidadTrabajo.Matricula.Obtener(id.GetValueOrDefault());
+            if (matriculaViewModels.Matricula == null)
+            {
+                return NotFound();
+            }
+
+            return View(matriculaViewModels);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdMatricula,IdPeriodo,IdCurso,IdAlumno,IdNivel")] Matricula matricula)
+        public IActionResult Upsert(MatriculaViewModels matriculaViewModels)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(matricula);
-                await _context.SaveChangesAsync();
+                if (matriculaViewModels.Matricula.Id == 0)
+                {
+                    _unidadTrabajo.Matricula.Agregar(matriculaViewModels.Matricula);
+                }
+                else
+                {
+                    _unidadTrabajo.Matricula.Actualizar(matriculaViewModels.Matricula);
+                }
+                _unidadTrabajo.Guardar();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAlumno"] = new SelectList(_context.Alumno, "IdAlumno", "Apellidos", matricula.IdAlumno);
-            ViewData["IdCurso"] = new SelectList(_context.Curso, "IdCurso", "Descripcion", matricula.IdCurso);
-            ViewData["IdNivel"] = new SelectList(_context.Nivel, "IdNivel", "DescripcionNivel", matricula.IdNivel);
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion", matricula.IdPeriodo);
-            return View(matricula);
-        }
-
-        // GET: Admin/Matricula/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            else
             {
-                return NotFound();
-            }
-
-            var matricula = await _context.Matricula.FindAsync(id);
-            if (matricula == null)
-            {
-                return NotFound();
-            }
-            ViewData["IdAlumno"] = new SelectList(_context.Alumno, "IdAlumno", "Apellidos", matricula.IdAlumno);
-            ViewData["IdCurso"] = new SelectList(_context.Curso, "IdCurso", "Descripcion", matricula.IdCurso);
-            ViewData["IdNivel"] = new SelectList(_context.Nivel, "IdNivel", "DescripcionNivel", matricula.IdNivel);
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion", matricula.IdPeriodo);
-            return View(matricula);
-        }
-
-        // POST: Admin/Matricula/Edit/5
-      
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdMatricula,IdPeriodo,IdCurso,IdAlumno,IdNivel")] Matricula matricula)
-        {
-            if (id != matricula.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                matriculaViewModels.PeriodoLista = _unidadTrabajo.Periodo.ObtenerTodos().Select(c => new SelectListItem
                 {
-                    _context.Update(matricula);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                    Text = c.Descripcion,
+                    Value = c.Id.ToString()
+                });
+                matriculaViewModels.AlumnoLista = _unidadTrabajo.Alumno.ObtenerTodos().Select(m => new SelectListItem
                 {
-                    if (!MatriculaExists(matricula.Id))
+                    Text = m.Nombres,
+                    Value = m.Id.ToString()
+                });
+                matriculaViewModels.CursoLista = _unidadTrabajo.Curso.ObtenerTodos().Select(p => new SelectListItem
+                {
+                    Text = p.Descripcion,
+                    Value = p.Id.ToString()
+                });
+                  matriculaViewModels.EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
+                  {
+                      Text = p.Nombres,
+                      Value = p.Id.ToString()
+                  });
+                    matriculaViewModels.NivelLista = _unidadTrabajo.Nivel.ObtenerTodos().Select(p => new SelectListItem
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        Text = p.DescripcionTurno,
+                        Value = p.Id.ToString()
+                    });
+                if (matriculaViewModels.Matricula.Id != 0)
+                {
+                    matriculaViewModels.Matricula = _unidadTrabajo.Matricula.Obtener(matriculaViewModels.Matricula.Id);
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAlumno"] = new SelectList(_context.Alumno, "IdAlumno", "Apellidos", matricula.IdAlumno);
-            ViewData["IdCurso"] = new SelectList(_context.Curso, "IdCurso", "Descripcion", matricula.IdCurso);
-            ViewData["IdNivel"] = new SelectList(_context.Nivel, "IdNivel", "DescripcionNivel", matricula.IdNivel);
-            ViewData["IdPeriodo"] = new SelectList(_context.Periodo, "IdPeriodo", "Descripcion", matricula.IdPeriodo);
-            return View(matricula);
+            return View(matriculaViewModels.Matricula);
         }
 
-        // GET: Admin/Matricula/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
         {
-            if (id == null)
+            var todos = _unidadTrabajo.Matricula.ObtenerTodos(incluirPropiedades: "Periodo,Alumno,Curso,Encargado,Nivel");
+            return Json(new { data = todos });
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var matriculaDb = _unidadTrabajo.Matricula.Obtener(id);
+            if (matriculaDb == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error al Borrar" });
             }
-
-            var matricula = await _context.Matricula
-                .Include(m => m.Alumno)
-                .Include(m => m.Curso)
-                .Include(m => m.Nivel)
-                .Include(m => m.Periodo)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (matricula == null)
-            {
-                return NotFound();
-            }
-
-            return View(matricula);
+          
+            _unidadTrabajo.Matricula.Remover(matriculaDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Producto Borrado Exitosamente" });
         }
 
-        // POST: Admin/Matricula/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var matricula = await _context.Matricula.FindAsync(id);
-            _context.Matricula.Remove(matricula);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool MatriculaExists(int id)
-        {
-            return _context.Matricula.Any(e => e.Id == id);
-        }
+        #endregion
     }
 }

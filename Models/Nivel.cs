@@ -11,7 +11,7 @@ namespace LICEORURALJASMINEZB.Models
     {
         [Key]
         public int Id { get; set; }
-        public int IdPeriodo{ get; set; }
+        public int IdPeriodo { get; set; }
         [ForeignKey("IdPeriodo")]
         public virtual Periodo Periodo { get; set; }
         [Required]
@@ -31,7 +31,6 @@ namespace LICEORURALJASMINEZB.Models
         public DateTime? HoraFin { get; set; }
         public string Estado { get; set; }
         public enum IsEstado { Activo , Inactivo  }
-        [NotMapped]
-        public List<GradoSeccion> ListaGradoSeccion { get; set; }
+      
     }
 }

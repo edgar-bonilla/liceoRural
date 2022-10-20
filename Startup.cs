@@ -14,8 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using LICEORURALJASMINEZ.Utilidades;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using SistemaInventario.AccesoDatos.Repositorio;
 using LICEORURALJASMINEZB.Repositorio.IRepositorio;
-using LICEORURALJASMINEZB.Repositorio;
 
 namespace LICEORURALJASMINEZB
 {

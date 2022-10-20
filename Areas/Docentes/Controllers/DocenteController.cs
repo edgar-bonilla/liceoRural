@@ -1,132 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using LICEORURALJASMINEZB.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using LICEORURALJASMINEZB.Models;
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
 
 namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
 {
     [Area("Docentes")]
     public class DocenteController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
-        public DocenteController(ApplicationDbContext context)
+        public DocenteController(IUnidadTrabajo unidadTrabajo)
         {
-            _context = context;
+            _unidadTrabajo = unidadTrabajo;
         }
 
-        // GET: Docentes/Docente
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Docente.ToListAsync());
-        }
 
-        // GET: Docentes/Docente/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var docente = await _context.Docente
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (docente == null)
-            {
-                return NotFound();
-            }
-
-            return View(docente);
-        }
-
-        // GET: Docentes/Docente/Create
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
 
-        // POST: Docentes/Docente/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDocente,DocumentoIdentidad,Nombres,Apellidos,FechaNacimiento,Sexo,Ciudad,Direccion,Email,NumeroTelefono,Estado,FechaRegistro")] Docente docente)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(docente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(docente);
-        }
 
-        // GET: Docentes/Docente/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+        public IActionResult Upsert(int? id)
         {
+            Docente docente = new Docente();
             if (id == null)
             {
-                return NotFound();
+                // Esto es para Crear nuevo Registro
+                return View(docente);
             }
-
-            var docente = await _context.Docente.FindAsync(id);
-            if (docente == null)
-            {
-                return NotFound();
-            }
-            return View(docente);
-        }
-
-        // POST: Docentes/Docente/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDocente,DocumentoIdentidad,Nombres,Apellidos,FechaNacimiento,Sexo,Ciudad,Direccion,Email,NumeroTelefono,Estado,FechaRegistro")] Docente docente)
-        {
-            if (id != docente.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(docente);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DocenteExists(docente.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(docente);
-        }
-
-        // GET: Docentes/Docente/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var docente = await _context.Docente
-                .FirstOrDefaultAsync(m => m.Id == id);
+            // Esto es para Actualizar
+            docente = _unidadTrabajo.Docente.Obtener(id.GetValueOrDefault());
             if (docente == null)
             {
                 return NotFound();
@@ -135,20 +40,50 @@ namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
             return View(docente);
         }
 
-        // POST: Docentes/Docente/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult Upsert(Docente docente)
         {
-            var docente = await _context.Docente.FindAsync(id);
-            _context.Docente.Remove(docente);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                if (docente.Id == 0)
+                {
+                    _unidadTrabajo.Docente.Agregar(docente);
+                }
+                else
+                {
+                    _unidadTrabajo.Docente.Actualizar(docente);
+                }
+                _unidadTrabajo.Guardar();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(docente);
         }
 
-        private bool DocenteExists(int id)
+
+
+
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
         {
-            return _context.Docente.Any(e => e.Id == id);
+            var todos = _unidadTrabajo.Docente.ObtenerTodos();
+            return Json(new { data = todos });
         }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var docenteDb = _unidadTrabajo.Docente.Obtener(id);
+            if (docenteDb == null)
+            {
+                return Json(new { success = false, message = "Error al Borrar" });
+            }
+            _unidadTrabajo.Docente.Remover(docenteDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Docente Borrado Exitosamente" });
+        }
+
+        #endregion
     }
 }

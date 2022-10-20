@@ -1,0 +1,141 @@
+﻿@model LICEORURALJASMINEZB.Models.Encargado
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear Encargado";
+}
+<div class="container">
+    <form method="post">
+        <div class="row p-3 border-0">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+        @if (Model.Id != 0)
+        {
+            // Actualizar
+            titulo = "Actualizar Encargado";
+        }
+
+        <div class="col-12 border-bottom">
+            <h1 class="font-weight-bold" style="color:darkorange">@titulo</h1>
+        </div>
+        <br />
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Nombres"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Nombres" class="form-control" />
+                    <span asp-validation-for="Nombres" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Apellidos"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Apellidos" class="form-control" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="EstadoCivil"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="EstadoCivil" class="form-control" />
+                    <span asp-validation-for="EstadoCivil" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="DocumentoIdentidad"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="DocumentoIdentidad" class="form-control" />
+                    <span asp-validation-for="DocumentoIdentidad" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Ciudad"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Ciudad" class="form-control" />
+                    <span asp-validation-for="Ciudad" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Direccion"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Email"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="TipoRelacion"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="TipoRelacion" class="form-control">
+                        <option value="0">Activo</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                        <option value="3">Inactivo</option>
+                           <option value="4">Inactivo</option>
+                        <option value="5">Inactivo</option>
+                        <option value="6">Inactivo</option>
+                     
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="FechaRegistro"></label>
+                </div>
+                <div class="col-8">
+                    <input type="date" asp-for="FechaRegistro" class="form-control" />
+                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Id != 0)
+                    {
+                        <partial name="_BotonesActualizarYRegresar" model="Model.Id" />
+                    }
+                    else
+                    {
+                        <partial name="_BotonesCrearYRegresar" />
+                    }
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    
+}
+
+
+
+
+
+

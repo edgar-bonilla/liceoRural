@@ -3,6 +3,8 @@
 
 $(document).ready(function () {
     loadDataTable();
+
+    
 });
 
 function loadDataTable() {
@@ -70,19 +72,24 @@ function loadDataTable() {
                             <a href="/Admin/Curso/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a onclick=Delete("/Admin/Curso/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                            <a onclick=Delete("/Admin/Curso/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">                            
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>
                         `;
                 }, "width": "20%"
+                 
             }
         ]
+
+
     });
+
 }
 
 
 function Delete(url) {
+    
     swal({
         title: "Esta Seguro que quiere Eliminar el Curso?",
         text: "Este Registro no se podra recuperar",

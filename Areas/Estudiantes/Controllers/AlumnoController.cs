@@ -26,9 +26,50 @@ namespace LICEORURALJASMINEZB.Areas.Estudiantes.Controllers
         {
             return View();
         }
+        
+
+
+        public IActionResult Upsert(int? id)
+        {
+            Alumno alumno = new Alumno();
+            if (id == null)
+            {
+                // Esto es para Crear nuevo Registro
+                return View(alumno);
+            }
+            // Esto es para Actualizar
+            alumno = _unidadTrabajo.Alumno.Obtener(id.GetValueOrDefault());
+            if (alumno == null)
+            {
+                return NotFound();
+            }
+
+            return View(alumno);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Alumno alumno)
+        {
+            if (ModelState.IsValid)
+            {
+                if (alumno.Id == 0)
+                {
+                    _unidadTrabajo.Alumno.Agregar(alumno);
+                }
+                else
+                {
+                    _unidadTrabajo.Alumno.Actualizar(alumno);
+                }
+                _unidadTrabajo.Guardar();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(alumno);
+        }
 
 
 
+       
         #region API
         [HttpGet]
         public IActionResult ObtenerTodos()
@@ -47,9 +88,10 @@ namespace LICEORURALJASMINEZB.Areas.Estudiantes.Controllers
             }
             _unidadTrabajo.Alumno.Remover(alumnoDb);
             _unidadTrabajo.Guardar();
-            return Json(new { success = true, message = "Curso Borrada Exitosamente" });
+            return Json(new { success = true, message = "Alumno Borrado Exitosamente" });
         }
 
         #endregion
     }
+
 }

@@ -1,94 +1,53 @@
-﻿@model IEnumerable<LICEORURALJASMINEZB.Models.Nivel>
+﻿@model IEnumerable<LICEORURALJASMINEZB.Models.ViewModels.NIvelViewModels>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Nivel";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
 
 <br />
-<div class="container ">
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <div class="card">
+                <div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h1 class="font-weight-bold" style="color:darkorange">Lista de Niveles</h1>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-primary" asp-action="Upsert"> <i class="fas fa-plus"></i> Crear Alumno </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="tblDatos" class="display" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Periodo</th>
+                                <th>Nivel</th>
+                                <th>Turno</th>
+                                <th>Hora Inicio</th>
+                                <th>Hora Fin</th>
+                                <th>Estado</th>
+                                <th>Acciones </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
 
-    <div class="row">
+            </div>
 
-        <div class="col-6">
-
-        </div>
-        <div class="col-6 text-right">
-            <partial name="_CreatePartialButton" />
         </div>
     </div>
-    <table id="tabla" class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Periodo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DescripcionNivel)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DescripcionTurno)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HoraInicio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HoraFin)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Estado)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Periodo.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescripcionNivel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescripcionTurno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HoraInicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HoraFin)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td style="width:150px;"><partial name="_TableButtonPartial" model="item.Id" /></td>
-            </tr>
-            }
-        </tbody>
-    </table>
+
 </div>
-
-
 @section Scripts {
-
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script>
-
-
-        $(document).ready(function () {
-            $('#tabla').DataTable({
-                dom: 'Blfrtip',
-                buttons: [
-    
-                ],
-                language: {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-                }
-
-            });
-        });
-    </script>
-
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+   <script src="~/scripts/nivel.js"></script>
 }
+

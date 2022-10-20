@@ -38,6 +38,56 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Areas\Admin\Controllers\CursoController.cs" />
+    <Content Include="Areas\Admin\Controllers\DocenteCursoController.cs" />
+    <Content Include="Areas\Admin\Controllers\GradoporNivelController.cs" />
+    <Content Include="Areas\Admin\Controllers\GradoSeccionController.cs" />
+    <Content Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Content Include="Areas\Admin\Controllers\HorarioController.cs" />
+    <Content Include="Areas\Admin\Controllers\MatriculaController.cs" />
+    <Content Include="Areas\Admin\Controllers\NivelController.cs" />
+    <Content Include="Areas\Admin\Controllers\NivelDetalleController.cs" />
+    <Content Include="Areas\Admin\Controllers\NivelDetalleCursoController.cs" />
+    <Content Include="Areas\Admin\Controllers\PeriodoController.cs" />
+    <Content Include="Areas\Admin\Controllers\UsuarioController.cs" />
+    <Content Include="Areas\Docentes\Controllers\CalificacionController.cs" />
+    <Content Include="Areas\Docentes\Controllers\DocenteController.cs" />
+    <Content Include="Areas\Estudiantes\Controllers\AlumnoController.cs" />
+    <Content Include="Areas\Identity\IdentityHostingStartup.cs" />
+    <Content Include="Areas\Identity\Pages\Account\AccessDenied.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Lockout.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Login.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Logout.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\Email.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\Index.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ManageNavPages.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\ShowRecoveryCodes.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\Register.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ResetPassword.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml.cs" />
+    <Content Include="Areas\Identity\Pages\Error.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
@@ -82,5 +132,7 @@
   <ItemGroup>
     <Folder Include="Upload\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

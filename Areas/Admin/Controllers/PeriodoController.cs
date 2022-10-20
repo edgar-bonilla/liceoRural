@@ -7,131 +7,38 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LICEORURALJASMINEZB.Data;
 using LICEORURALJASMINEZB.Models;
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
 
 namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class PeriodoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
-        public PeriodoController(ApplicationDbContext context)
+        public PeriodoController(IUnidadTrabajo unidadTrabajo)
         {
-            _context = context;
+            _unidadTrabajo = unidadTrabajo;
         }
 
-        // GET: Admin/Periodo
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Periodo.ToListAsync());
-        }
 
-        public JsonResult Listar()
-        {
-            var data = _context.Periodo.ToList();
-            return new JsonResult(data);
-        }
-        // GET: Admin/Periodo/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var periodo = await _context.Periodo
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (periodo == null)
-            {
-                return NotFound();
-            }
-
-            return View(periodo);
-        }
-
-        // GET: Admin/Periodo/Create
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
 
-        // POST: Admin/Periodo/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPeriodo,Descripcion,FechaInicio,FechaFin,Estado")] Periodo periodo)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(periodo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(periodo);
-        }
 
-        // GET: Admin/Periodo/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+        public IActionResult Upsert(int? id)
         {
+            Periodo periodo = new Periodo();
             if (id == null)
             {
-                return NotFound();
+                // Esto es para Crear nuevo Registro
+                return View(periodo);
             }
-
-            var periodo = await _context.Periodo.FindAsync(id);
-            if (periodo == null)
-            {
-                return NotFound();
-            }
-            return View(periodo);
-        }
-
-        // POST: Admin/Periodo/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPeriodo,Descripcion,FechaInicio,FechaFin,Estado")] Periodo periodo)
-        {
-            if (id != periodo.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(periodo);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PeriodoExists(periodo.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(periodo);
-        }
-
-        // GET: Admin/Periodo/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var periodo = await _context.Periodo
-                .FirstOrDefaultAsync(m => m.Id == id);
+            // Esto es para Actualizar
+           periodo= _unidadTrabajo.Periodo.Obtener(id.GetValueOrDefault());
             if (periodo == null)
             {
                 return NotFound();
@@ -140,20 +47,50 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             return View(periodo);
         }
 
-        // POST: Admin/Periodo/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult Upsert(Periodo periodo)
         {
-            var periodo = await _context.Periodo.FindAsync(id);
-            _context.Periodo.Remove(periodo);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                if (periodo.Id == 0)
+                {
+                    _unidadTrabajo.Periodo.Agregar(periodo);
+                }
+                else
+                {
+                    _unidadTrabajo.Periodo.Actualizar(periodo);
+                }
+                _unidadTrabajo.Guardar();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(periodo);
         }
 
-        private bool PeriodoExists(int id)
+
+
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
         {
-            return _context.Periodo.Any(e => e.Id == id);
+            var todos = _unidadTrabajo.Periodo.ObtenerTodos();
+            return Json(new { data = todos });
         }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var periodoDb = _unidadTrabajo.Periodo.Obtener(id);
+            if (periodoDb == null)
+            {
+                return Json(new { success = false, message = "Error al Borrar" });
+            }
+            _unidadTrabajo.Periodo.Remover(periodoDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Periodo Borrado Exitosamente" });
+        }
+
+        #endregion
     }
+
 }

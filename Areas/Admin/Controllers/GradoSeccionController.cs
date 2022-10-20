@@ -7,148 +7,90 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LICEORURALJASMINEZB.Data;
 using LICEORURALJASMINEZB.Models;
+using LICEORURALJASMINEZB.Repositorio.IRepositorio;
 
 namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class GradoSeccionController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
-        public GradoSeccionController(ApplicationDbContext context)
+        public GradoSeccionController(IUnidadTrabajo unidadTrabajo)
         {
-            _context = context;
+            _unidadTrabajo = unidadTrabajo;
         }
 
-        // GET: Admin/GradoSeccion
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.GradoSeccion.ToListAsync());
-        }
 
-        // GET: Admin/GradoSeccion/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var gradoSeccion = await _context.GradoSeccion
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (gradoSeccion == null)
-            {
-                return NotFound();
-            }
-
-            return View(gradoSeccion);
-        }
-
-        // GET: Admin/GradoSeccion/Create
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
 
-        // POST: Admin/GradoSeccion/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+        public IActionResult Upsert(int? id)
+        {
+            GradoSeccion gradoSeccion = new GradoSeccion();
+            if (id == null)
+            {
+                // Esto es para Crear nuevo Registro
+                return View(gradoSeccion);
+            }
+            // Esto es para Actualizar
+            gradoSeccion = _unidadTrabajo.GradoSeccion.Obtener(id.GetValueOrDefault());
+            if (gradoSeccion== null)
+            {
+                return NotFound();
+            }
+
+            return View(gradoSeccion);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGradoSeccion,DescripcionGrado,DescripcionSeccion,Estado")] GradoSeccion gradoSeccion)
+        public IActionResult Upsert(GradoSeccion gradoSeccion)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(gradoSeccion);
-                await _context.SaveChangesAsync();
+                if (gradoSeccion.Id == 0)
+                {
+                    _unidadTrabajo.GradoSeccion.Agregar(gradoSeccion);
+                }
+                else
+                {
+                    _unidadTrabajo.GradoSeccion.Actualizar(gradoSeccion);
+                }
+                _unidadTrabajo.Guardar();
                 return RedirectToAction(nameof(Index));
             }
             return View(gradoSeccion);
         }
 
-        // GET: Admin/GradoSeccion/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var gradoSeccion = await _context.GradoSeccion.FindAsync(id);
-            if (gradoSeccion == null)
-            {
-                return NotFound();
-            }
-            return View(gradoSeccion);
+
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
+        {
+            var todos = _unidadTrabajo.GradoSeccion.ObtenerTodos();
+            return Json(new { data = todos });
         }
 
-        // POST: Admin/GradoSeccion/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGradoSeccion,DescripcionGrado,DescripcionSeccion,Estado")] GradoSeccion gradoSeccion)
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
-            if (id != gradoSeccion.Id)
+            var gradoSeccionDb = _unidadTrabajo.GradoSeccion.Obtener(id);
+            if (gradoSeccionDb == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error al Borrar" });
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(gradoSeccion);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GradoSeccionExists(gradoSeccion.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(gradoSeccion);
+            _unidadTrabajo.GradoSeccion.Remover(gradoSeccionDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Grado Seccion Borrado Exitosamente" });
         }
 
-        // GET: Admin/GradoSeccion/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var gradoSeccion = await _context.GradoSeccion
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (gradoSeccion == null)
-            {
-                return NotFound();
-            }
-
-            return View(gradoSeccion);
-        }
-
-        // POST: Admin/GradoSeccion/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var gradoSeccion = await _context.GradoSeccion.FindAsync(id);
-            _context.GradoSeccion.Remove(gradoSeccion);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool GradoSeccionExists(int id)
-        {
-            return _context.GradoSeccion.Any(e => e.Id == id);
-        }
+        #endregion
     }
+
 }

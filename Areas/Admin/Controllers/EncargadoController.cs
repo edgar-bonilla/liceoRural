@@ -21,14 +21,10 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
             _unidadTrabajo = unidadTrabajo;
         }
 
-
         public IActionResult Index()
         {
             return View();
         }
-
-
-
         public IActionResult Upsert(int? id)
         {
             Encargado encargado = new Encargado();
@@ -73,7 +69,7 @@ namespace LICEORURALJASMINEZB.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult ObtenerTodos()
         {
-            var todos = _unidadTrabajo.Curso.ObtenerTodos();
+            var todos = _unidadTrabajo.Encargado.ObtenerTodos();
             return Json(new { data = todos });
         }
 

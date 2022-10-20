@@ -59,7 +59,7 @@ function loadDataTable() {
                     else {
                         return "Inactivo";
                     }
-                }, "width": "20%"
+                }, "width": "30%"
             },
             {
                 "data": "id",

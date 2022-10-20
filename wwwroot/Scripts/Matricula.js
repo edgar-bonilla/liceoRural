@@ -11,7 +11,8 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "periodo.descripcion", "width": "20%" },
-            { "data": "Alumno.nombres", "width": "20%" },
+            { "data": "alumno.nombres", "width": "20%" },
+            { "data": "alumno.apellidos", "width": "20%" },
           
             {
                 "data": "estado",

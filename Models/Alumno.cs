@@ -10,13 +10,13 @@ namespace LICEORURALJASMINEZB.Models
     {
 
         [Key]
-        [Display(Name = "ID")]
+      
         public int Id { get; set; }
         [Required(ErrorMessage = " El Nombre es requierido")]
         [Display(Name = "Nombre")]
         public string Nombres { get; set; }
-        [Required(ErrorMessage = " El Apellido es requierido")]
-        [Display(Name = "Apellido")]
+        [Required(ErrorMessage = " El Primer Apellido es requierido")]
+        [Display(Name = "Primer Apellido")]
         public string Apellidos { get; set; }
         [Required(ErrorMessage = "La cedula es requierida")]
         [Display(Name = "Cedula")]
@@ -31,9 +31,9 @@ namespace LICEORURALJASMINEZB.Models
         [Display(Name = "Sexo")]
         public string Sexo { get; set; }
          public enum IsSexo { Femenino = 1, Masculino = 2 }
-        [Required(ErrorMessage = "La Ciudad es requierida")]
-        [Display(Name = "Ciudad")]
-        public string Ciudad { get; set; }
+        [Required(ErrorMessage = "La Nacionalidad es requierida")]
+        [Display(Name = "Nacionalidad")]
+        public string Nacionalidad { get; set; }
         [Required(ErrorMessage = "La Direcion es requierida")]
         [Display(Name = "Direcion")]
         public string Direccion { get; set; }
@@ -45,14 +45,14 @@ namespace LICEORURALJASMINEZB.Models
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{2})$", ErrorMessage = "Insertar el rango de 8 digitos")]
         [Display(Name = "Telefono")]
         public string Telefono { get; set; }
-  
+        [Required(ErrorMessage = "La Edad es requierida")]
+        [Display(Name = "Edad")]
+        public string Edad { get; set; }
         public string Estado { get; set; }
         public enum IsEstado {Activo = 1 , Inactivo = 2, Aplazado = 3 }
-        [Required(ErrorMessage = "La Fecha de Registro es requierida")]
-        [Display(Name = " Fecha Registro")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM-dd-yyyy}")]
-        public DateTime? FechaRegistro { get; set; }
+        [Required(ErrorMessage = "El Lugar de nacimiento es requierida")]
+        [Display(Name = " Lugar de nacimiento")]
+        public string LugarNacimiento { get; set; }
 
 
     }

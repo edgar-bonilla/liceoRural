@@ -55,26 +55,7 @@ function loadDataTable() {
             { "data": "apellidos", },
             { "data": "documentoIdentidad", },
             { "data": "numeroTelefono", },
-            {
-                "data": "fechaNacimiento", "render": function (data) {
-
-                    var date = new Date(data);
-                    var day = date.getDate();
-                    var month = date.getMonth() + 1;
-                    return ("0" + day).slice(-2) + "/" + (month.length > 1 ? month : + month) + "/" + date.getFullYear();
-                }, "autoWidth": true
-},
-            {
-                "data": "sexo",
-                "render": function (data) {
-                    if (data == true) {
-                        return "Femenino";
-                    }
-                    else {
-                        return "Masculino";
-                    }
-                },
-            },
+     
             { "data": "ciudad", },
             {
                 "data": "estado",

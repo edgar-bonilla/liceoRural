@@ -48,27 +48,7 @@
                     <span asp-validation-for="DocumentoIdentidad" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="FechaNacimiento"></label>
-                </div>
-                <div class="col-8">
-                    <input type="date" id="txtSelectedDate" asp-for="FechaNacimiento" class="form-control" />
-                    <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Sexo"></label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="Sexo" class="form-control">
-                        <option value="1">Femenino</option>
-                        <option value="2">Masculino</option>
-
-                    </select>
-                </div>
-            </div>
+           
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="Ciudad"></label>
@@ -103,19 +83,6 @@
                 <div class="col-8">
                     <input asp-for="NumeroTelefono" class="form-control" />
                     <span asp-validation-for="NumeroTelefono" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Estado"></label>
-                </div>
-                <div class="col-8">
-                    <select asp-for="Estado" class="form-control">
-                        <option value="1">Activo</option>
-                        <option value="2">Inactivo</option>
-                     
-                    </select>
                 </div>
             </div>
             <div class="form-group row">

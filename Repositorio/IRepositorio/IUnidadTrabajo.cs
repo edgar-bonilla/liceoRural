@@ -10,7 +10,7 @@ namespace LICEORURALJASMINEZB.Repositorio.IRepositorio
         IAlumnoRepositorio Alumno { get; }
         IPeriodoRepositorio Periodo { get; }
         IGradoSeccionRepositorio GradoSeccion { get; }
-        INivelRepositorio Nivel { get; }
+     
         IDocenteRepositorio Docente { get; }
         IMatriculaRepositorio Matricula { get; }
         IEncargadoRepositorio Encargado { get; }

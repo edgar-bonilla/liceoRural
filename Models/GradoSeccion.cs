@@ -21,6 +21,6 @@ namespace LICEORURALJASMINEZB.Models
         public enum estado { Activo = 0, Inactivo = 1 }
         [NotMapped]
         public bool Asignado { get; set; }
-        public List<Curso> ListaCurso { get; set; }
+     
     }
 }

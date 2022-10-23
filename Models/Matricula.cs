@@ -21,15 +21,27 @@ namespace LICEORURALJASMINEZB.Models
         public int IdAlumno { get; set; }
         [ForeignKey("IdAlumno")]
         public virtual Alumno Alumno { get; set; }
-        public int IdNivel { get; set; }
-        [ForeignKey(" IdNivel ")]
-        public virtual Nivel Nivel { get; set; }
+        public int IdGradoSeccion { get; set; }
+        [ForeignKey(" IdGradoSeccion ")]
+        public virtual GradoSeccion GradoSeccion { get; set; }
         public int IdEncargado { get; set; }
         [ForeignKey(" IdEncargado")]
         public virtual Encargado Encargado { get; set; }
         public string InstitucionProcedencia  { get; set; }
+        public string TieneExpediente { get; set; }
+        public enum IsTieneExpediente { Si = 1, No = 2 }
+        public string Repitente  { get; set; }
+        public enum IsRepitente { Si = 1, No = 2 }
+        public string Adecucion { get; set; }
+        public enum IsAdecucion { Nosignificativa = 1, Significativa = 2, DeAcceso = 3,Sinadecuación = 4 }
 
-        public string EstadoAlumno  { get; set; }
-        public enum IsEstadoAlumno { Nuevo = 1, Antiguo = 2 }
+        public string PadeceAlgunaEnfermedad { get; set; }
+
+        public string ConsumeTratamientos { get; set; }
+        public string InstituciónProcedencia { get; set; }
+
+       
+
     }
+
 }

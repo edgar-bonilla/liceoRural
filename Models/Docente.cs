@@ -20,16 +20,7 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Apellido")]
         public string Apellidos { get; set; }
-        [Required]
-        [Display(Name = " Fecha Nacimiento")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? FechaNacimiento { get; set; }
-        [Required]
-        [Display(Name = "Sexo")]
-        public string Sexo { get; set; }
-        public enum IsSexo { Femenino = 1, Masculino = 2 }
-        [Required]
+
         [Display(Name = "Ciudad")]
         public string Ciudad { get; set; }
         [Required]
@@ -42,10 +33,6 @@ namespace LICEORURALJASMINEZB.Models
         [Required]
         [Display(Name = "Telefono")]
         public string NumeroTelefono { get; set; }
-       
-        public string Estado { get; set; }
-        public enum IsEstado { Activo = 0, Inactivo = 1 }
-
         [Required]
         [Display(Name = " Fecha Registro")]
         [DataType(DataType.Date)]

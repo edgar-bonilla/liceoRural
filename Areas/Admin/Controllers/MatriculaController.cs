@@ -1,23 +1,23 @@
 ﻿
 using System.Linq;
+using LICEORURALJASMINEZB.Data;
 using LICEORURALJASMINEZB.Models;
 using LICEORURALJASMINEZB.Models.ViewModels;
 using LICEORURALJASMINEZB.Repositorio.IRepositorio;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace SistemaInventario.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
     public class MatriculaController : Controller
     {
         private readonly IUnidadTrabajo _unidadTrabajo;
+
         public MatriculaController(IUnidadTrabajo unidadTrabajo)
         {
             _unidadTrabajo = unidadTrabajo;
-          
         }
 
 
@@ -25,6 +25,7 @@ namespace SistemaInventario.Areas.Admin.Controllers
         {
             return View();
         }
+
 
         public IActionResult Upsert(int? id)
         {
@@ -46,16 +47,16 @@ namespace SistemaInventario.Areas.Admin.Controllers
                     Text = p.Descripcion,
                     Value = p.Id.ToString()
                 }),
-                  EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
-                   {
-                       Text = p.Nombres,
-                       Value = p.Id.ToString()
-                   }),
-                    NivelLista = _unidadTrabajo.Nivel.ObtenerTodos().Select(p => new SelectListItem
-                     {
-                         Text = p.DescripcionTurno,
-                         Value = p.Id.ToString()
-                     })
+                EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
+                {
+                    Text = p.Nombres,
+                    Value = p.Id.ToString()
+                }),
+                NivelLista = _unidadTrabajo.GradoSeccion.ObtenerTodos().Select(p => new SelectListItem
+                {
+                    Text = p.DescripcionGrado,
+                    Value = p.Id.ToString()
+                })
             };
 
 
@@ -108,16 +109,16 @@ namespace SistemaInventario.Areas.Admin.Controllers
                     Text = p.Descripcion,
                     Value = p.Id.ToString()
                 });
-                  matriculaViewModels.EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
-                  {
-                      Text = p.Nombres,
-                      Value = p.Id.ToString()
-                  });
-                    matriculaViewModels.NivelLista = _unidadTrabajo.Nivel.ObtenerTodos().Select(p => new SelectListItem
-                    {
-                        Text = p.DescripcionTurno,
-                        Value = p.Id.ToString()
-                    });
+                matriculaViewModels.EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
+                {
+                    Text = p.Nombres,
+                    Value = p.Id.ToString()
+                });
+                matriculaViewModels.NivelLista = _unidadTrabajo.GradoSeccion.ObtenerTodos().Select(p => new SelectListItem
+                {
+                    Text = p.DescripcionGrado,
+                    Value = p.Id.ToString()
+                });
                 if (matriculaViewModels.Matricula.Id != 0)
                 {
                     matriculaViewModels.Matricula = _unidadTrabajo.Matricula.Obtener(matriculaViewModels.Matricula.Id);
@@ -126,28 +127,29 @@ namespace SistemaInventario.Areas.Admin.Controllers
             return View(matriculaViewModels.Matricula);
         }
 
-        #region API
-        [HttpGet]
-        public IActionResult ObtenerTodos()
-        {
-            var todos = _unidadTrabajo.Matricula.ObtenerTodos(incluirPropiedades: "Periodo,Alumno,Curso,Encargado,Nivel");
-            return Json(new { data = todos });
-        }
+        //#region API
+        //[HttpGet]
+        //public IActionResult ObtenerTodos()
+        //{
+        //    var todos = _context.Matricula.Include(n => n.Encargado).Include(n => n.GradoSeccion).Include(a => a.Alumno).Include(p => p.Periodo).Include(c => c.Curso).ToList();
+       
+        //    return Json(new { data = todos });
+        //}
 
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            var matriculaDb = _unidadTrabajo.Matricula.Obtener(id);
-            if (matriculaDb == null)
-            {
-                return Json(new { success = false, message = "Error al Borrar" });
-            }
-          
-            _unidadTrabajo.Matricula.Remover(matriculaDb);
-            _unidadTrabajo.Guardar();
-            return Json(new { success = true, message = "Producto Borrado Exitosamente" });
-        }
+        //[HttpDelete]
+        //public IActionResult Delete(int id)
+        //{
+        //    var matriculaDb = _context.Matricula.Obtener(id);
+        //    if (matriculaDb == null)
+        //    {
+        //        return Json(new { success = false, message = "Error al Borrar" });
+        //    }
 
-        #endregion
+        //    _unidadTrabajo.Matricula.Remover(matriculaDb);
+        //    _unidadTrabajo.Guardar();
+        //    return Json(new { success = true, message = "Producto Borrado Exitosamente" });
+        //}
+
+        //#endregion
     }
 }

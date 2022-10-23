@@ -39,15 +39,9 @@
 
   <ItemGroup>
     <Content Include="Areas\Admin\Controllers\CursoController.cs" />
-    <Content Include="Areas\Admin\Controllers\DocenteCursoController.cs" />
-    <Content Include="Areas\Admin\Controllers\GradoporNivelController.cs" />
     <Content Include="Areas\Admin\Controllers\GradoSeccionController.cs" />
     <Content Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Content Include="Areas\Admin\Controllers\HorarioController.cs" />
     <Content Include="Areas\Admin\Controllers\MatriculaController.cs" />
-    <Content Include="Areas\Admin\Controllers\NivelController.cs" />
-    <Content Include="Areas\Admin\Controllers\NivelDetalleController.cs" />
-    <Content Include="Areas\Admin\Controllers\NivelDetalleCursoController.cs" />
     <Content Include="Areas\Admin\Controllers\PeriodoController.cs" />
     <Content Include="Areas\Admin\Controllers\UsuarioController.cs" />
     <Content Include="Areas\Docentes\Controllers\CalificacionController.cs" />

@@ -1,7 +1,7 @@
 ﻿var datatable;
 
 $(document).ready(function () {
-    loadDataTable();
+    loadDataTable()
 });
 
 function loadDataTable() {
@@ -10,21 +10,14 @@ function loadDataTable() {
             "url": "/Admin/Matricula/ObtenerTodos"
         },
         "columns": [
-            { "data": "periodo.descripcion", "width": "20%" },
-            { "data": "alumno.nombres", "width": "20%" },
-            { "data": "alumno.apellidos", "width": "20%" },
-          
-            {
-                "data": "estado",
-                "render": function (data) {
-                    if (data == true) {
-                        return "Activo";
-                    }
-                    else {
-                        return "Inactivo";
-                    }
-                }, "width": "20%"
-            },
+            { "data": "situacion", },
+            { "data": "estadoAlumno", },
+            { "data": "nivel.descripcionNivel",  },
+            { "data": "gradoSeccion.descripcionGrado",  },
+            { "data": "grado.descripcionSeccion", },
+            { "data": "alumno.nombres",},
+            { "data": "alumno.apellidos",  },
+            { "data": "alumno.documentoIdentidad",  },
             {
                 "data": "id",
                 "render": function (data) {
@@ -38,7 +31,7 @@ function loadDataTable() {
                             </a>
                         </div>
                         `;
-                }, "width": "20%"
+                }, "width": "40%"
             }
         ]
     });

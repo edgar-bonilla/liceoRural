@@ -68,6 +68,13 @@
 </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+     <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                swal("Exito", "Curso Agregado ", "success")
+            });
+        });
+    </script>
 }
 
 

@@ -21,7 +21,6 @@ namespace SistemaInventario.AccesoDatos.Repositorio
 
         public IGradoSeccionRepositorio GradoSeccion { get; private set; }
 
-        public INivelRepositorio Nivel { get; private set; }
 
         public IDocenteRepositorio Docente { get; private set; }
 
@@ -35,7 +34,6 @@ namespace SistemaInventario.AccesoDatos.Repositorio
             Alumno = new AlumnoRepositorio(_db);   
             Periodo = new PeriodoRepositorio(_db);
             GradoSeccion = new GradoSeccionRepositorio(_db);
-            Nivel = new NivelRepositorio(_db);
             Docente = new DocenteRepositorio(_db);
            Matricula = new MatriculaRepositorio(_db);
             Encargado = new EncargadoRepositorio(_db);

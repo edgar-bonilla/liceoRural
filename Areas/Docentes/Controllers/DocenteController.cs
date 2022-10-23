@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using LICEORURALJASMINEZB.Models;
 using LICEORURALJASMINEZB.Repositorio.IRepositorio;
+using LICEORURALJASMINEZ.Utilidades;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LICEORURALJASMINEZB.Areas.Docentes.Controllers
 {
     [Area("Docentes")]
+    [Authorize(Roles = DS.Role_Admin + "," + DS.Role_Docente)]
     public class DocenteController : Controller
     {
         private readonly IUnidadTrabajo _unidadTrabajo;

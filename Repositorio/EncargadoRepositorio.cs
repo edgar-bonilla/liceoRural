@@ -23,16 +23,16 @@ namespace LICEORURALJASMINEZB.Repositorio
             if (encargadoDb != null)
             {
                 encargadoDb.Nombres = encargado.Nombres;
-                encargadoDb.Apellidos = encargado.Apellidos;
+                encargadoDb.PrimerApellido = encargado.PrimerApellido;
+                encargadoDb.SegundoApellido = encargado.SegundoApellido;
                 encargadoDb.EstadoCivil = encargado.EstadoCivil;
                 encargadoDb.DocumentoIdentidad = encargado.DocumentoIdentidad;
-                encargadoDb.Ciudad = encargado.Ciudad;
-                encargadoDb.Direccion = encargado.Direccion;
-                encargadoDb.Email = encargado.Email;
                 encargadoDb.Telefono = encargado.Telefono;
                 encargadoDb.TipoRelacion = encargado.TipoRelacion;
-                encargadoDb.FechaRegistro = encargado.FechaRegistro;
-            
+                encargadoDb.Nacionalidad = encargado.Nacionalidad;
+                encargadoDb.Ocupación = encargado.Ocupación;
+
+
 
             }
         }

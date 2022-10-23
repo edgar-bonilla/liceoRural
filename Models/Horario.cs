@@ -12,11 +12,7 @@ namespace LICEORURALJASMINEZB.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [Display(Name = "Detalle Curso  ")]
-        public int IdNivelDetalleCurso { get; set; }
-        [ForeignKey("IdNivelDetalleCurso")]
-        public virtual NivelDetalleCurso NivelDetalleCurso { get; set; }
+   
         [Required]
         [Display(Name = "Dia Semana  ")]
         public string DiaSemana { get; set; }

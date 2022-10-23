@@ -25,11 +25,14 @@ namespace LICEORURALJASMINEZB.Repositorio
                 MatriculaDb.IdPeriodo = matricula.IdPeriodo;
                 MatriculaDb.IdCurso = matricula.IdCurso;
                 MatriculaDb.IdAlumno = matricula.IdAlumno;
-                MatriculaDb.IdNivel = matricula.IdNivel;
+                MatriculaDb.IdGradoSeccion = matricula.IdGradoSeccion;
                 MatriculaDb.IdEncargado = matricula.IdEncargado;
+                MatriculaDb.TieneExpediente = matricula.TieneExpediente;
+                MatriculaDb.Repitente = matricula.Repitente;
+                MatriculaDb.Adecucion = matricula.Adecucion;
+                MatriculaDb.PadeceAlgunaEnfermedad = matricula.PadeceAlgunaEnfermedad;
+                MatriculaDb.ConsumeTratamientos = matricula.ConsumeTratamientos;
                 MatriculaDb.InstitucionProcedencia = matricula.InstitucionProcedencia;
-                MatriculaDb.EstadoAlumno = matricula.EstadoAlumno;
-
 
             }
         }

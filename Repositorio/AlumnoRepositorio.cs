@@ -27,12 +27,13 @@ namespace LICEORURALJASMINEZB.Repositorio
                 alumnoDb.DocumentoIdentidad = alumno.DocumentoIdentidad;
                 alumnoDb.FechaNacimiento = alumno.FechaNacimiento;
                 alumnoDb.Sexo = alumno.Sexo;
-                alumnoDb.Ciudad = alumno.Ciudad;
+                alumnoDb.Nacionalidad = alumno.Nacionalidad;
                 alumnoDb.Direccion = alumno.Direccion;
                 alumnoDb.Correo = alumno.Correo;
                 alumnoDb.Telefono = alumno.Telefono;
+                alumnoDb.Edad =alumno.Edad;
                 alumnoDb.Estado = alumno.Estado;
-                alumnoDb.FechaRegistro = alumno.FechaRegistro;
+                alumnoDb.LugarNacimiento = alumno.LugarNacimiento;
             
 
             }

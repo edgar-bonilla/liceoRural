@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LICEORURALJASMINEZB.Migrations
 {
-    public partial class addCursoToDatabase : Migration
+    public partial class addAlumnoToDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,12 +18,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     DocumentoIdentidad = table.Column<string>(nullable: false),
                     FechaNacimiento = table.Column<DateTime>(nullable: false),
                     Sexo = table.Column<string>(nullable: false),
-                    Ciudad = table.Column<string>(nullable: false),
+                    Nacionalidad = table.Column<string>(nullable: false),
                     Direccion = table.Column<string>(nullable: false),
                     Correo = table.Column<string>(nullable: false),
                     Telefono = table.Column<string>(nullable: false),
+                    Edad = table.Column<string>(nullable: false),
                     Estado = table.Column<string>(nullable: true),
-                    FechaRegistro = table.Column<DateTime>(nullable: false)
+                    LugarNacimiento = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,6 +77,35 @@ namespace LICEORURALJASMINEZB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Concentrado",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdDocenteNivelDetalleCurso = table.Column<int>(nullable: false),
+                    Descripcion = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Concentrado", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Curso",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreCurso = table.Column<string>(nullable: false),
+                    Descripcion = table.Column<string>(nullable: false),
+                    Estado = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Curso", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Docente",
                 columns: table => new
                 {
@@ -84,13 +114,10 @@ namespace LICEORURALJASMINEZB.Migrations
                     DocumentoIdentidad = table.Column<string>(nullable: false),
                     Nombres = table.Column<string>(nullable: false),
                     Apellidos = table.Column<string>(nullable: false),
-                    FechaNacimiento = table.Column<DateTime>(nullable: false),
-                    Sexo = table.Column<string>(nullable: false),
-                    Ciudad = table.Column<string>(nullable: false),
+                    Ciudad = table.Column<string>(nullable: true),
                     Direccion = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     NumeroTelefono = table.Column<string>(nullable: false),
-                    Estado = table.Column<string>(nullable: true),
                     FechaRegistro = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -99,24 +126,24 @@ namespace LICEORURALJASMINEZB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "encargado",
+                name: "Encargado",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombres = table.Column<string>(nullable: false),
-                    Apellidos = table.Column<string>(nullable: false),
+                    PrimerApellido = table.Column<string>(nullable: false),
+                    SegundoApellido = table.Column<string>(nullable: false),
                     EstadoCivil = table.Column<string>(nullable: true),
                     DocumentoIdentidad = table.Column<string>(nullable: false),
-                    Ciudad = table.Column<string>(nullable: true),
-                    Direccion = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    TipoRelacion = table.Column<string>(nullable: false),
-                    FechaRegistro = table.Column<DateTime>(nullable: false)
+                    Telefono = table.Column<string>(nullable: false),
+                    TipoRelacion = table.Column<string>(nullable: true),
+                    Nacionalidad = table.Column<string>(nullable: false),
+                    Ocupación = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_encargado", x => x.Id);
+                    table.PrimaryKey("PK_Encargado", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,6 +162,22 @@ namespace LICEORURALJASMINEZB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Horario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DiaSemana = table.Column<string>(nullable: false),
+                    HoraInicio = table.Column<DateTime>(nullable: false),
+                    HoraFin = table.Column<DateTime>(nullable: false),
+                    Estado = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Horario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "image",
                 columns: table => new
                 {
@@ -145,29 +188,6 @@ namespace LICEORURALJASMINEZB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_image", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Menu",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: false),
-                    Icono = table.Column<string>(nullable: true),
-                    Estado = table.Column<string>(nullable: true),
-                    FechaRegistro = table.Column<DateTime>(nullable: false),
-                    Nombres = table.Column<string>(nullable: false),
-                    Apellidos = table.Column<string>(nullable: false),
-                    DocumentoIdentidad = table.Column<string>(nullable: false),
-                    Ciudad = table.Column<string>(nullable: true),
-                    Direccion = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    NumeroTelefono = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Menu", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,22 +204,6 @@ namespace LICEORURALJASMINEZB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Periodo", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SubMenu",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdMenu = table.Column<int>(nullable: false),
-                    Nombre = table.Column<string>(nullable: true),
-                    NombreFormulario = table.Column<string>(nullable: true),
-                    FechaRegistro = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SubMenu", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -220,7 +224,7 @@ namespace LICEORURALJASMINEZB.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,7 +245,7 @@ namespace LICEORURALJASMINEZB.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -261,7 +265,7 @@ namespace LICEORURALJASMINEZB.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,13 +283,13 @@ namespace LICEORURALJASMINEZB.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -305,244 +309,7 @@ namespace LICEORURALJASMINEZB.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Curso",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreCurso = table.Column<string>(nullable: false),
-                    Descripcion = table.Column<string>(nullable: false),
-                    Estado = table.Column<string>(nullable: false),
-                    GradoSeccionId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Curso", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Curso_GradoSeccion_GradoSeccionId",
-                        column: x => x.GradoSeccionId,
-                        principalTable: "GradoSeccion",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Nivel",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPeriodo = table.Column<int>(nullable: false),
-                    DescripcionNivel = table.Column<string>(nullable: false),
-                    DescripcionTurno = table.Column<string>(nullable: true),
-                    HoraInicio = table.Column<DateTime>(nullable: false),
-                    HoraFin = table.Column<DateTime>(nullable: false),
-                    Estado = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Nivel", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Nivel_Periodo_IdPeriodo",
-                        column: x => x.IdPeriodo,
-                        principalTable: "Periodo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Matricula",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPeriodo = table.Column<int>(nullable: false),
-                    IdCurso = table.Column<int>(nullable: false),
-                    CursoId = table.Column<int>(nullable: true),
-                    IdAlumno = table.Column<int>(nullable: false),
-                    IdNivel = table.Column<int>(nullable: false),
-                    IdEncargado = table.Column<int>(nullable: false),
-                    InstitucionProcedencia = table.Column<string>(nullable: true),
-                    EstadoAlumno = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Matricula", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Matricula_Curso_CursoId",
-                        column: x => x.CursoId,
-                        principalTable: "Curso",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Matricula_Alumno_IdAlumno",
-                        column: x => x.IdAlumno,
-                        principalTable: "Alumno",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Matricula_encargado_IdEncargado",
-                        column: x => x.IdEncargado,
-                        principalTable: "encargado",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Matricula_Nivel_IdNivel",
-                        column: x => x.IdNivel,
-                        principalTable: "Nivel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Matricula_Periodo_IdPeriodo",
-                        column: x => x.IdPeriodo,
-                        principalTable: "Periodo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NivelDetalle",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdNivel = table.Column<int>(nullable: false),
-                    IdGradoSeccion = table.Column<int>(nullable: false),
-                    TotalVacantes = table.Column<int>(nullable: false),
-                    VacantesDisponibles = table.Column<int>(nullable: false),
-                    VacantesOcupadas = table.Column<int>(nullable: false),
-                    Estado = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NivelDetalle", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_NivelDetalle_GradoSeccion_IdGradoSeccion",
-                        column: x => x.IdGradoSeccion,
-                        principalTable: "GradoSeccion",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_NivelDetalle_Nivel_IdNivel",
-                        column: x => x.IdNivel,
-                        principalTable: "Nivel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NivelDetalleCurso",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdNivelDetalle = table.Column<int>(nullable: false),
-                    IdNivel = table.Column<int>(nullable: false),
-                    IdGradoSeccion = table.Column<int>(nullable: false),
-                    IdCurso = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NivelDetalleCurso", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_NivelDetalleCurso_Curso_IdCurso",
-                        column: x => x.IdCurso,
-                        principalTable: "Curso",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_NivelDetalleCurso_GradoSeccion_IdGradoSeccion",
-                        column: x => x.IdGradoSeccion,
-                        principalTable: "GradoSeccion",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_NivelDetalleCurso_Nivel_IdNivel",
-                        column: x => x.IdNivel,
-                        principalTable: "Nivel",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_NivelDetalleCurso_NivelDetalle_IdNivelDetalle",
-                        column: x => x.IdNivelDetalle,
-                        principalTable: "NivelDetalle",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DocenteCurso",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdNivelDetalleCurso = table.Column<int>(nullable: false),
-                    IdDocente = table.Column<int>(nullable: false),
-                    Estado = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DocenteCurso", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DocenteCurso_Docente_IdDocente",
-                        column: x => x.IdDocente,
-                        principalTable: "Docente",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_DocenteCurso_NivelDetalleCurso_IdNivelDetalleCurso",
-                        column: x => x.IdNivelDetalleCurso,
-                        principalTable: "NivelDetalleCurso",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Horario",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdNivelDetalleCurso = table.Column<int>(nullable: false),
-                    DiaSemana = table.Column<string>(nullable: false),
-                    HoraInicio = table.Column<DateTime>(nullable: false),
-                    HoraFin = table.Column<DateTime>(nullable: false),
-                    Estado = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Horario", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Horario_NivelDetalleCurso_IdNivelDetalleCurso",
-                        column: x => x.IdNivelDetalleCurso,
-                        principalTable: "NivelDetalleCurso",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Concentrado",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdDocenteNivelDetalleCurso = table.Column<int>(nullable: false),
-                    Descripcion = table.Column<string>(nullable: true),
-                    IdDocenteCurso = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Concentrado", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Concentrado_DocenteCurso_IdDocenteCurso",
-                        column: x => x.IdDocenteCurso,
-                        principalTable: "DocenteCurso",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -563,11 +330,66 @@ namespace LICEORURALJASMINEZB.Migrations
                         column: x => x.IdAlumno,
                         principalTable: "Alumno",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Calificacion_Concentrado_IdConcentrado",
                         column: x => x.IdConcentrado,
                         principalTable: "Concentrado",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Matricula",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdPeriodo = table.Column<int>(nullable: false),
+                    IdCurso = table.Column<int>(nullable: false),
+                    CursoId = table.Column<int>(nullable: true),
+                    IdAlumno = table.Column<int>(nullable: false),
+                    IdGradoSeccion = table.Column<int>(nullable: false),
+                    IdEncargado = table.Column<int>(nullable: false),
+                    InstitucionProcedencia = table.Column<string>(nullable: true),
+                    TieneExpediente = table.Column<string>(nullable: true),
+                    Repitente = table.Column<string>(nullable: true),
+                    Adecucion = table.Column<string>(nullable: true),
+                    PadeceAlgunaEnfermedad = table.Column<string>(nullable: true),
+                    ConsumeTratamientos = table.Column<string>(nullable: true),
+                    InstituciónProcedencia = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Matricula", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Matricula_Curso_CursoId",
+                        column: x => x.CursoId,
+                        principalTable: "Curso",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Matricula_Alumno_IdAlumno",
+                        column: x => x.IdAlumno,
+                        principalTable: "Alumno",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Matricula_Encargado_IdEncargado",
+                        column: x => x.IdEncargado,
+                        principalTable: "Encargado",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Matricula_GradoSeccion_IdGradoSeccion",
+                        column: x => x.IdGradoSeccion,
+                        principalTable: "GradoSeccion",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Matricula_Periodo_IdPeriodo",
+                        column: x => x.IdPeriodo,
+                        principalTable: "Periodo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -622,31 +444,6 @@ namespace LICEORURALJASMINEZB.Migrations
                 column: "IdConcentrado");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Concentrado_IdDocenteCurso",
-                table: "Concentrado",
-                column: "IdDocenteCurso");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Curso_GradoSeccionId",
-                table: "Curso",
-                column: "GradoSeccionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DocenteCurso_IdDocente",
-                table: "DocenteCurso",
-                column: "IdDocente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DocenteCurso_IdNivelDetalleCurso",
-                table: "DocenteCurso",
-                column: "IdNivelDetalleCurso");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Horario_IdNivelDetalleCurso",
-                table: "Horario",
-                column: "IdNivelDetalleCurso");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Matricula_CursoId",
                 table: "Matricula",
                 column: "CursoId");
@@ -662,49 +459,14 @@ namespace LICEORURALJASMINEZB.Migrations
                 column: "IdEncargado");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matricula_IdNivel",
+                name: "IX_Matricula_IdGradoSeccion",
                 table: "Matricula",
-                column: "IdNivel");
+                column: "IdGradoSeccion");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Matricula_IdPeriodo",
                 table: "Matricula",
                 column: "IdPeriodo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Nivel_IdPeriodo",
-                table: "Nivel",
-                column: "IdPeriodo");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NivelDetalle_IdGradoSeccion",
-                table: "NivelDetalle",
-                column: "IdGradoSeccion");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NivelDetalle_IdNivel",
-                table: "NivelDetalle",
-                column: "IdNivel");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NivelDetalleCurso_IdCurso",
-                table: "NivelDetalleCurso",
-                column: "IdCurso");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NivelDetalleCurso_IdGradoSeccion",
-                table: "NivelDetalleCurso",
-                column: "IdGradoSeccion");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NivelDetalleCurso_IdNivel",
-                table: "NivelDetalleCurso",
-                column: "IdNivel");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NivelDetalleCurso_IdNivelDetalle",
-                table: "NivelDetalleCurso",
-                column: "IdNivelDetalle");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -728,6 +490,9 @@ namespace LICEORURALJASMINEZB.Migrations
                 name: "Calificacion");
 
             migrationBuilder.DropTable(
+                name: "Docente");
+
+            migrationBuilder.DropTable(
                 name: "Horario");
 
             migrationBuilder.DropTable(
@@ -735,12 +500,6 @@ namespace LICEORURALJASMINEZB.Migrations
 
             migrationBuilder.DropTable(
                 name: "Matricula");
-
-            migrationBuilder.DropTable(
-                name: "Menu");
-
-            migrationBuilder.DropTable(
-                name: "SubMenu");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -752,31 +511,16 @@ namespace LICEORURALJASMINEZB.Migrations
                 name: "Concentrado");
 
             migrationBuilder.DropTable(
-                name: "Alumno");
-
-            migrationBuilder.DropTable(
-                name: "encargado");
-
-            migrationBuilder.DropTable(
-                name: "DocenteCurso");
-
-            migrationBuilder.DropTable(
-                name: "Docente");
-
-            migrationBuilder.DropTable(
-                name: "NivelDetalleCurso");
-
-            migrationBuilder.DropTable(
                 name: "Curso");
 
             migrationBuilder.DropTable(
-                name: "NivelDetalle");
+                name: "Alumno");
+
+            migrationBuilder.DropTable(
+                name: "Encargado");
 
             migrationBuilder.DropTable(
                 name: "GradoSeccion");
-
-            migrationBuilder.DropTable(
-                name: "Nivel");
 
             migrationBuilder.DropTable(
                 name: "Periodo");

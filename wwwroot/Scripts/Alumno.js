@@ -62,7 +62,7 @@ function loadDataTable() {
                     var month = date.getMonth() + 1;
                     return ("0" + day).slice(-2) + "/" + (month.length > 1 ? month : + month) + "/" + date.getFullYear();
                 }, "autoWidth": true,
-               "width": "17%" },
+               "width": "17%" , "className": "text-center" },
             {
                 "data": "sexo",
                 "render": function (data) {
@@ -74,7 +74,7 @@ function loadDataTable() {
                     }
                 }, 
             },
-            { "data": "ciudad", },
+            { "data": "nacionalidad", },
             {
                 "data": "estado",
                 "render": function (data) {

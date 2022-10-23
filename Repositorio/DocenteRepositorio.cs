@@ -25,13 +25,10 @@ namespace LICEORURALJASMINEZB.Repositorio
                 docenteDb.Nombres = docente.Nombres;
                 docenteDb.Apellidos = docente.Apellidos;
                 docenteDb.DocumentoIdentidad = docente.DocumentoIdentidad;
-                docenteDb.FechaNacimiento = docente.FechaNacimiento;
-                docenteDb.Sexo = docente.Sexo;
                 docenteDb.Ciudad = docente.Ciudad;
                 docenteDb.Direccion = docente.Direccion;
                 docenteDb.Email = docente.Email;
                 docenteDb.NumeroTelefono = docente.NumeroTelefono;
-                docenteDb.Estado = docente.Estado;
                 docenteDb.FechaRegistro = docente.FechaRegistro;
             
 

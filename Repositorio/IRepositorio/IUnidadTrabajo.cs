@@ -13,7 +13,7 @@ namespace LICEORURALJASMINEZB.Repositorio.IRepositorio
      
         IDocenteRepositorio Docente { get; }
         IMatriculaRepositorio Matricula { get; }
-        IEncargadoRepositorio Encargado { get; }
+ 
 
         void Guardar();
     }

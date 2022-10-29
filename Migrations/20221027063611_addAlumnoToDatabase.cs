@@ -126,27 +126,6 @@ namespace LICEORURALJASMINEZB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Encargado",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombres = table.Column<string>(nullable: false),
-                    PrimerApellido = table.Column<string>(nullable: false),
-                    SegundoApellido = table.Column<string>(nullable: false),
-                    EstadoCivil = table.Column<string>(nullable: true),
-                    DocumentoIdentidad = table.Column<string>(nullable: false),
-                    Telefono = table.Column<string>(nullable: false),
-                    TipoRelacion = table.Column<string>(nullable: true),
-                    Nacionalidad = table.Column<string>(nullable: false),
-                    Ocupación = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Encargado", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GradoSeccion",
                 columns: table => new
                 {
@@ -336,7 +315,7 @@ namespace LICEORURALJASMINEZB.Migrations
                         column: x => x.IdConcentrado,
                         principalTable: "Concentrado",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -346,52 +325,50 @@ namespace LICEORURALJASMINEZB.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdPeriodo = table.Column<int>(nullable: false),
-                    IdCurso = table.Column<int>(nullable: false),
-                    CursoId = table.Column<int>(nullable: true),
-                    IdAlumno = table.Column<int>(nullable: false),
+                    Nombre = table.Column<string>(nullable: true),
+                    PrimerApellido = table.Column<string>(nullable: true),
+                    SegundoApellido = table.Column<string>(nullable: true),
+                    Cedula = table.Column<string>(nullable: true),
+                    Edad = table.Column<string>(nullable: true),
+                    Sexo = table.Column<string>(nullable: true),
+                    FechaNacimiento = table.Column<DateTime>(nullable: false),
                     IdGradoSeccion = table.Column<int>(nullable: false),
-                    IdEncargado = table.Column<int>(nullable: false),
                     InstitucionProcedencia = table.Column<string>(nullable: true),
+                    Nacionalidad = table.Column<string>(nullable: true),
+                    LugarNacimiento = table.Column<string>(nullable: true),
+                    Telefono = table.Column<string>(nullable: true),
+                    Direccion = table.Column<string>(nullable: true),
+                    Correo = table.Column<string>(nullable: true),
                     TieneExpediente = table.Column<string>(nullable: true),
                     Repitente = table.Column<string>(nullable: true),
                     Adecucion = table.Column<string>(nullable: true),
                     PadeceAlgunaEnfermedad = table.Column<string>(nullable: true),
                     ConsumeTratamientos = table.Column<string>(nullable: true),
-                    InstituciónProcedencia = table.Column<string>(nullable: true)
+                    InstituciónProcedencia = table.Column<string>(nullable: true),
+                    NombreEncargado = table.Column<string>(nullable: true),
+                    PrimerApellidoEncargado = table.Column<string>(nullable: true),
+                    SegundoApellidoEncargado = table.Column<string>(nullable: true),
+                    CedulaEncargado = table.Column<string>(nullable: true),
+                    NacionalidadEncargado = table.Column<string>(nullable: true),
+                    TelefonoEncargado = table.Column<string>(nullable: true),
+                    Ocupacion = table.Column<string>(nullable: true),
+                    TipoRelacion = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Matricula", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Matricula_Curso_CursoId",
-                        column: x => x.CursoId,
-                        principalTable: "Curso",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Matricula_Alumno_IdAlumno",
-                        column: x => x.IdAlumno,
-                        principalTable: "Alumno",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Matricula_Encargado_IdEncargado",
-                        column: x => x.IdEncargado,
-                        principalTable: "Encargado",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
                         name: "FK_Matricula_GradoSeccion_IdGradoSeccion",
                         column: x => x.IdGradoSeccion,
                         principalTable: "GradoSeccion",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Matricula_Periodo_IdPeriodo",
                         column: x => x.IdPeriodo,
                         principalTable: "Periodo",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -444,21 +421,6 @@ namespace LICEORURALJASMINEZB.Migrations
                 column: "IdConcentrado");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matricula_CursoId",
-                table: "Matricula",
-                column: "CursoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Matricula_IdAlumno",
-                table: "Matricula",
-                column: "IdAlumno");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Matricula_IdEncargado",
-                table: "Matricula",
-                column: "IdEncargado");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Matricula_IdGradoSeccion",
                 table: "Matricula",
                 column: "IdGradoSeccion");
@@ -490,6 +452,9 @@ namespace LICEORURALJASMINEZB.Migrations
                 name: "Calificacion");
 
             migrationBuilder.DropTable(
+                name: "Curso");
+
+            migrationBuilder.DropTable(
                 name: "Docente");
 
             migrationBuilder.DropTable(
@@ -508,16 +473,10 @@ namespace LICEORURALJASMINEZB.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Concentrado");
-
-            migrationBuilder.DropTable(
-                name: "Curso");
-
-            migrationBuilder.DropTable(
                 name: "Alumno");
 
             migrationBuilder.DropTable(
-                name: "Encargado");
+                name: "Concentrado");
 
             migrationBuilder.DropTable(
                 name: "GradoSeccion");

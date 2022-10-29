@@ -82,6 +82,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\arrow-left.svg" />
+    <None Include="wwwroot\images\arrow-right.svg" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
@@ -127,6 +129,6 @@
     <Folder Include="Upload\" />
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="s" appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

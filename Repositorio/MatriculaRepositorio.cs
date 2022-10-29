@@ -23,16 +23,34 @@ namespace LICEORURALJASMINEZB.Repositorio
             if (MatriculaDb != null)
             {
                 MatriculaDb.IdPeriodo = matricula.IdPeriodo;
-                MatriculaDb.IdCurso = matricula.IdCurso;
-                MatriculaDb.IdAlumno = matricula.IdAlumno;
+                MatriculaDb.Nombre = matricula.Nombre;
+                MatriculaDb.PrimerApellido = matricula.PrimerApellido;
+                MatriculaDb.SegundoApellido = matricula.SegundoApellido;
+                MatriculaDb.Cedula = matricula.Cedula;
+                MatriculaDb.Edad  = matricula.Edad;
+                MatriculaDb.Sexo = matricula.Sexo;
+                MatriculaDb.FechaNacimiento= matricula.FechaNacimiento;
                 MatriculaDb.IdGradoSeccion = matricula.IdGradoSeccion;
-                MatriculaDb.IdEncargado = matricula.IdEncargado;
+                MatriculaDb.InstitucionProcedencia = matricula.InstitucionProcedencia;
+                MatriculaDb.Nacionalidad = matricula.Nacionalidad;
+                MatriculaDb.LugarNacimiento = matricula.LugarNacimiento;
+                MatriculaDb.Telefono = matricula.Telefono;
+                MatriculaDb.Direccion = matricula.Direccion;
+                MatriculaDb.Correo =    matricula.Correo;
                 MatriculaDb.TieneExpediente = matricula.TieneExpediente;
                 MatriculaDb.Repitente = matricula.Repitente;
                 MatriculaDb.Adecucion = matricula.Adecucion;
                 MatriculaDb.PadeceAlgunaEnfermedad = matricula.PadeceAlgunaEnfermedad;
                 MatriculaDb.ConsumeTratamientos = matricula.ConsumeTratamientos;
-                MatriculaDb.InstitucionProcedencia = matricula.InstitucionProcedencia;
+               // Datos del encargado
+               MatriculaDb.NombreEncargado = matricula.NombreEncargado;
+               MatriculaDb.PrimerApellidoEncargado = matricula.PrimerApellidoEncargado;
+               MatriculaDb.SegundoApellidoEncargado = matricula.SegundoApellidoEncargado;
+               MatriculaDb.CedulaEncargado = matricula.CedulaEncargado;
+               MatriculaDb.NacionalidadEncargado = matricula.NacionalidadEncargado;
+               MatriculaDb.TelefonoEncargado = matricula.TelefonoEncargado;
+               MatriculaDb.Ocupacion  = matricula.Ocupacion;
+                MatriculaDb.TipoRelacion = matricula.TipoRelacion;
 
             }
         }

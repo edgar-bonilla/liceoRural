@@ -21,13 +21,7 @@ function ShowAlumno() {
                 object += '<td>' + item.sexo + '</td>';
                 object += '<td>' + item.ciudad + '</td>';
                 object += '<td>' + item.direccion.val(ObtenerFormatoFecha(json.FechaNacimiento)); + '</td>';
-                object += '<td>' + item.nombres
-                if (item.nombres == 'juan')
-                   {
-                      return 'rrrrrrrrr'
-                   }
-
-                    + '</td>';
+                object += '<td>' + item.nombres + '</td>';
 
                 object += '<td><a href="#" class="btn btn-primary">Editar</a> || <a href="#" class="btn btn-danger">Eliminar</a> </td>';
                 object += '</tr>';

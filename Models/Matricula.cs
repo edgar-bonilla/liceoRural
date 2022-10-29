@@ -14,20 +14,29 @@ namespace LICEORURALJASMINEZB.Models
         public int IdPeriodo { get; set; }
         [ForeignKey(" IdPeriodo")]
         public virtual Periodo Periodo { get; set; }
-        public int IdCurso { get; set; }
-    
-        [ForeignKey("CursoId")]
-        public virtual Curso Curso { get; set; }
-        public int IdAlumno { get; set; }
-        [ForeignKey("IdAlumno")]
-        public virtual Alumno Alumno { get; set; }
+      
+         //==============================================
+         public string Nombre { get; set; }
+        public string PrimerApellido { get; set; }
+        public string SegundoApellido { get; set; }
+        public string Cedula { get; set; }
+        public string Edad { get; set; }
+        public string Sexo { get; set; }
+        public enum IsSexo { Femenino = 1, Masculino = 2 }
+        [Required(ErrorMessage = "La Fecha Nacimiento es requierida ")]
+        [Display(Name = "Fecha Nacimiento")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:MM-dd-yyyy}")]
+        public DateTime? FechaNacimiento { get; set; }
         public int IdGradoSeccion { get; set; }
         [ForeignKey(" IdGradoSeccion ")]
         public virtual GradoSeccion GradoSeccion { get; set; }
-        public int IdEncargado { get; set; }
-        [ForeignKey(" IdEncargado")]
-        public virtual Encargado Encargado { get; set; }
         public string InstitucionProcedencia  { get; set; }
+        public string Nacionalidad { get; set; }
+        public string LugarNacimiento { get; set; }
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
+        public string Correo { get; set; }
         public string TieneExpediente { get; set; }
         public enum IsTieneExpediente { Si = 1, No = 2 }
         public string Repitente  { get; set; }
@@ -38,10 +47,17 @@ namespace LICEORURALJASMINEZB.Models
         public string PadeceAlgunaEnfermedad { get; set; }
 
         public string ConsumeTratamientos { get; set; }
-        public string InstituciónProcedencia { get; set; }
 
-       
-
+        //Datos encargado
+        public string NombreEncargado { get; set; }
+        public string PrimerApellidoEncargado { get; set; }
+        public string SegundoApellidoEncargado { get; set; }
+        public string CedulaEncargado { get; set; }
+        public string NacionalidadEncargado { get; set; }
+        public string TelefonoEncargado { get; set; }
+        public string Ocupacion { get; set; }
+        public string TipoRelacion { get; set; }
+        public enum IsTipoRelacion { Padre = 1, Madre = 2, Tio = 3, Tia = 4, Abuelo = 5, Abuela = 6, Encarcado = 7 }
     }
 
 }

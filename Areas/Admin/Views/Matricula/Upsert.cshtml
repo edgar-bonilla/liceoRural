@@ -1,166 +1,276 @@
 ﻿@model LICEORURALJASMINEZB.Models.ViewModels.MatriculaViewModels
 @{
-Layout = "~/Views/Shared/_Layout.cshtml";
-var titulo = "Crear Matricula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var titulo = "Crear Matricula";
 }
 <div class="container">
-   <div class="row mt-4">
-      <div class="col-sm-12">
-         <form method="post" enctype="multipart/form-data">
-            <div class="row p-3 border-0">
-               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            </div>
-            @if (Model.Matricula.Id != 0)
-            {
-            // Actualizar
-            titulo = "Actualizar Matricula";
-            <input type="hidden" asp-for="Matricula.Id" />
-            }
-            <div class="col-12 border-bottom">
-               <h2 class="text-primary">@titulo</h2>
-            </div>
-
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Instituto de Procedencia</label>
-                            <input asp-for="Matricula.InstitucionProcedencia" class="form-control" />
-                            <span asp-validation-for="Matricula.InstitucionProcedencia" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="cboesrepitente">Es Repitente</label>
-                            <select  class="form-control">
-                                <option value="NO">NO</option>
-                                <option value="SI">SI</option>
-                            </select>
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <form method="post">
+                <div class="row p-3 border-0">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+                @if (Model.Matricula.Id != 0)
+                {
+                    // Actualizar
+                    titulo = "Actualizar Matricula";
+                }
+                <div class="col-12 border-bottom">
+                    <h2 class="text-primary">@titulo</h2>
+                </div>
+                <br />
+                <!--DATOS DEL ALUMNO-->
+                <div class="row mb-3">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h1 class="font-weight-bold" style="color:darkorange">Datos del Alumno</h1>
+                                <input id="txtidalumno" type="hidden" value="0" />
+                                <div class="row align-items-end">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Periodo</label>
+                                            @Html.DropDownListFor(m => m.Matricula.IdPeriodo, Model.PeriodoLista, "Seleccione",
+                                            new { @class = "form-control" })
+                                            <span asp-validation-for="Matricula.IdPeriodo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Nombre</label>
+                                            <input asp-for="Matricula.Nombre" class="form-control" />
+                                            <span asp-validation-for="Matricula.Nombre" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Primer Apellido</label>
+                                            <input asp-for="Matricula.PrimerApellido" class="form-control" />
+                                            <span asp-validation-for="Matricula.PrimerApellido" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Segundo Apellido</label>
+                                            <input asp-for="Matricula.SegundoApellido" class="form-control" />
+                                            <span asp-validation-for="Matricula.SegundoApellido" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Cedula</label>
+                                            <input asp-for="Matricula.Cedula" class="form-control" />
+                                            <span asp-validation-for="Matricula.Cedula" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Sexo</label>
+                                            <select asp-for="Matricula.Sexo" class="form-control">
+                                                <option value="1">Femenino</option>
+                                                <option value="2">Masculino</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Edad</label>
+                                            <input asp-for="Matricula.Edad" class="form-control" />
+                                            <span asp-validation-for="Matricula.Edad" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Fecha Nacimiento</label>
+                                            <input type="date" asp-for="Matricula.FechaNacimiento" class="form-control" />
+                                            <span asp-validation-for="Matricula.FechaNacimiento" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style ="font-size:17px ;color:black">Nivel</label>
+                                            @Html.DropDownListFor(n => n.Matricula.IdGradoSeccion, Model.NivelLista, "Seleccione",
+                                            new { @class = "form-control" })
+                                            <span asp-validation-for="Matricula.IdGradoSeccion" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Institucion de Procedencia</label>
+                                            <input asp-for="Matricula.InstitucionProcedencia" class="form-control" />
+                                            <span asp-validation-for="Matricula.InstitucionProcedencia" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Nacionalidad</label>
+                                            <input asp-for="Matricula.Nacionalidad" class="form-control" />
+                                            <span asp-validation-for="Matricula.Nacionalidad" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Lugar de Nacimiento</label>
+                                            <input asp-for="Matricula.LugarNacimiento" class="form-control" />
+                                            <span asp-validation-for="Matricula.LugarNacimiento" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Telefono</label>
+                                            <input asp-for="Matricula.Telefono" class="form-control" />
+                                            <span asp-validation-for="Matricula.Telefono" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Direccion</label>
+                                            <input asp-for="Matricula.Direccion" class="form-control" />
+                                            <span asp-validation-for="Matricula.Direccion" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Correo</label>
+                                            <input asp-for="Matricula.Correo" class="form-control" />
+                                            <span asp-validation-for="Matricula.Correo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Tiene Expediente</label>
+                                            <select asp-for="Matricula.TieneExpediente" class="form-control">
+                                                <option value="1">No</option>
+                                                <option value="2">Si</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Repitente</label>
+                                            <select asp-for="Matricula.Repitente" class="form-control">
+                                                <option value="1">No</option>
+                                                <option value="2">Si</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Adecucion</label>
+                                            <select asp-for="Matricula.Adecucion" class="form-control">
+                                                <option value="1">No significativa</option>
+                                                <option value="2">Significativa</option>
+                                                <option value="3">De Acceso</option>
+                                                <option value="4">Sin Adecuación</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label  >Periodo</label>
-                            @Html.DropDownListFor(c => c.Matricula.IdPeriodo, Model.PeriodoLista, "Seleccione",
-                            new { @class = "form-control" })
-                            <span asp-validation-for="Matricula.IdPeriodo" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label >Nivel</label>
-                            @Html.DropDownListFor(c => c.Matricula.IdCurso, Model.CursoLista, "Seleccione",
-                            new { @class = "form-control" })
-                            <span asp-validation-for="Matricula.IdCurso" class="text-danger"></span>
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h1 class="font-weight-bold" style="color:darkorange">Datos del Encargado</h1>
+                                <div class="row align-items-end">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Nombre</label>
+                                            <input asp-for="Matricula.NombreEncargado" class="form-control" />
+                                            <span asp-validation-for="Matricula.NombreEncargado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Primer Apellido</label>
+                                            <input asp-for="Matricula.PrimerApellidoEncargado" class="form-control" />
+                                            <span asp-validation-for="Matricula.PrimerApellidoEncargado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Segundo Apellido</label>
+                                            <input asp-for="Matricula.SegundoApellidoEncargado" class="form-control" />
+                                            <span asp-validation-for="Matricula.SegundoApellidoEncargado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Cedula</label>
+                                            <input asp-for="Matricula.CedulaEncargado" class="form-control" />
+                                            <span asp-validation-for="Matricula.CedulaEncargado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Nacionalidad</label>
+                                            <input asp-for="Matricula.NacionalidadEncargado" class="form-control" />
+                                            <span asp-validation-for="Matricula.NacionalidadEncargado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label  style="font-size:17px ;color:black">Telefono</label>
+                                            <input asp-for="Matricula.TelefonoEncargado" class="form-control" />
+                                            <span asp-validation-for="Matricula.TelefonoEncargado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label style="font-size:17px ;color:black">Ocupacion</label>
+                                            <input asp-for="Matricula.Ocupacion" class="form-control" />
+                                            <span asp-validation-for="Matricula.Ocupacion" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label  style="font-size:17px ;color:black">Tipo Relacion</label>
+                                            <select asp-for="Matricula.TipoRelacion" class="form-control">
+                                                <option value="1">Padre</option>
+                                                <option value="2"> Madre</option>
+                                                <option value="3">Tio</option>
+                                                <option value="4">Tia</option>
+                                                <option value="5">Abuelo </option>
+                                                <option value="6">Abuela</option>
+                                                <option value="7"> Encarcado</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Periodo</label>
-                            @Html.DropDownListFor(c => c.Matricula.IdAlumno, Model.AlumnoLista, "Seleccione",
-                             new { @class = "form-control" })
-                             <span asp-validation-for="Matricula.IdAlumno" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label>Nivel</label>
-                            @Html.DropDownListFor(c => c.Matricula.IdGradoSeccion, Model.NivelLista, "Seleccione",
-                            new { @class = "form-control" })
-                            <span asp-validation-for="Matricula.IdGradoSeccion" class="text-danger"></span>
-                        </div>
+                <div class="form-group row">
+                    <div class="col-5 ">
+                        @if (Model.Matricula.Id != 0)
+                        {
+                            <partial name="_BotonesActualizarYRegresar" model="Model.Matricula.Id" />
+                        }
+                        else
+                        {
+                            <partial name="_BotonesCrearYRegresar" />
+                        }
                     </div>
                 </div>
-
-      
-
-
-
-
-               <div class="form-group row">
-                  <div class="col-4">
-                     Marca
-                  </div>
-                  <div class="col-8">
-                     @Html.DropDownListFor(c => c.Matricula.IdEncargado, Model.EncargadoLista, "Seleccione",
-                     new { @class = "form-control" })
-                     <span asp-validation-for="Matricula.IdEncargado" class="text-danger"></span>
-                  </div>
-               </div>
-               <div class="form-group row">
-                  <div class="col-4">
-                     <label asp-for="Matricula.InstitucionProcedencia"></label>
-                  </div>
-                  <div class="col-8">
-                     <input asp-for="Matricula.InstitucionProcedencia" class="form-control" />
-                     <span asp-validation-for="Matricula.InstitucionProcedencia" class="text-danger"></span>
-                  </div>
-               </div>
-               <div class="form-group row">
-                  <div class="col-4">
-                     <label asp-for="Matricula.TieneExpediente"></label>
-                  </div>
-                  <div class="col-8">
-                     <input asp-for="Matricula.TieneExpediente" class="form-control" />
-                     <span asp-validation-for="Matricula.TieneExpediente" class="text-danger"></span>
-                  </div>
-               </div>
-               <div class="form-group row">
-                  <div class="col-4">
-                     <label asp-for="Matricula.Repitente"></label>
-                  </div>
-                  <div class="col-8">
-                     <input asp-for="Matricula.Repitente" class="form-control" />
-                     <span asp-validation-for="Matricula.Repitente" class="text-danger"></span>
-                  </div>
-               </div>
-               <div class="form-group row">
-                  <div class="col-4">
-                     <label asp-for="Matricula.Adecucion"></label>
-                  </div>
-                  <div class="col-8">
-                     <input asp-for="Matricula.Adecucion" class="form-control" />
-                     <span asp-validation-for="Matricula.Adecucion" class="text-danger"></span>
-                  </div>
-               </div>
-               <div class="form-group row">
-                  <div class="col-4">
-                     <label asp-for="Matricula.PadeceAlgunaEnfermedad"></label>
-                  </div>
-                  <div class="col-8">
-                     <input asp-for="Matricula.PadeceAlgunaEnfermedad" class="form-control" />
-                     <span asp-validation-for="Matricula.PadeceAlgunaEnfermedad" class="text-danger"></span>
-                  </div>
-               </div>
-               <div class="form-group row">
-                  <div class="col-4">
-                     <label asp-for="Matricula.ConsumeTratamientos"></label>
-                  </div>
-                  <div class="col-8">
-                     <input asp-for="Matricula.ConsumeTratamientos" class="form-control" />
-                     <span asp-validation-for="Matricula.ConsumeTratamientos" class="text-danger"></span>
-                  </div>
-               </div>
-               <div class="form-group row">
-                  <div class="col-8 offset-4">
-                     @if (Model.Matricula.Id != 0)
-                     {
-                     <partial name="_BotonesActualizarYRegresar" model="Model.Matricula.Id" />
-                     }
-                     else
-                     {
-                     <partial name="_BotonesCrearYRegresar" />
-                     }
-                  </div>
-               </div>
-            </>
-         </form>
-      </div>
-   </div>
+            </form>
+        </div>
+    </div>
 </div>
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/scripts/crearmatricula.js"></script>
 }

@@ -25,7 +25,7 @@ namespace SistemaInventario.AccesoDatos.Repositorio
         public IDocenteRepositorio Docente { get; private set; }
 
         public IMatriculaRepositorio Matricula { get; private set; }
-        public IEncargadoRepositorio Encargado { get; private set; }
+    
 
         public UnidadTrabajo(ApplicationDbContext db)
         {
@@ -36,7 +36,7 @@ namespace SistemaInventario.AccesoDatos.Repositorio
             GradoSeccion = new GradoSeccionRepositorio(_db);
             Docente = new DocenteRepositorio(_db);
            Matricula = new MatriculaRepositorio(_db);
-            Encargado = new EncargadoRepositorio(_db);
+ 
         }
 
         public void Guardar()

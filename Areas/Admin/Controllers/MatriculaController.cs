@@ -37,21 +37,6 @@ namespace SistemaInventario.Areas.Admin.Controllers
                     Text = c.Descripcion,
                     Value = c.Id.ToString()
                 }),
-                AlumnoLista = _unidadTrabajo.Alumno.ObtenerTodos().Select(m => new SelectListItem
-                {
-                    Text = m.Nombres,
-                    Value = m.Id.ToString()
-                }),
-                CursoLista = _unidadTrabajo.Curso.ObtenerTodos().Select(p => new SelectListItem
-                {
-                    Text = p.Descripcion,
-                    Value = p.Id.ToString()
-                }),
-                EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
-                {
-                    Text = p.Nombres,
-                    Value = p.Id.ToString()
-                }),
                 NivelLista = _unidadTrabajo.GradoSeccion.ObtenerTodos().Select(p => new SelectListItem
                 {
                     Text = p.DescripcionGrado,
@@ -62,10 +47,10 @@ namespace SistemaInventario.Areas.Admin.Controllers
 
             if (id == null)
             {
-                // Esto es para Crear nuevo Registro
+                //Esto es para Crear nuevo Registro
                 return View(matriculaViewModels);
             }
-            // Esto es para Actualizar
+            //Esto es para Actualizar
             matriculaViewModels.Matricula = _unidadTrabajo.Matricula.Obtener(id.GetValueOrDefault());
             if (matriculaViewModels.Matricula == null)
             {
@@ -99,21 +84,7 @@ namespace SistemaInventario.Areas.Admin.Controllers
                     Text = c.Descripcion,
                     Value = c.Id.ToString()
                 });
-                matriculaViewModels.AlumnoLista = _unidadTrabajo.Alumno.ObtenerTodos().Select(m => new SelectListItem
-                {
-                    Text = m.Nombres,
-                    Value = m.Id.ToString()
-                });
-                matriculaViewModels.CursoLista = _unidadTrabajo.Curso.ObtenerTodos().Select(p => new SelectListItem
-                {
-                    Text = p.Descripcion,
-                    Value = p.Id.ToString()
-                });
-                matriculaViewModels.EncargadoLista = _unidadTrabajo.Encargado.ObtenerTodos().Select(p => new SelectListItem
-                {
-                    Text = p.Nombres,
-                    Value = p.Id.ToString()
-                });
+             
                 matriculaViewModels.NivelLista = _unidadTrabajo.GradoSeccion.ObtenerTodos().Select(p => new SelectListItem
                 {
                     Text = p.DescripcionGrado,
@@ -127,29 +98,27 @@ namespace SistemaInventario.Areas.Admin.Controllers
             return View(matriculaViewModels.Matricula);
         }
 
-        //#region API
-        //[HttpGet]
-        //public IActionResult ObtenerTodos()
-        //{
-        //    var todos = _context.Matricula.Include(n => n.Encargado).Include(n => n.GradoSeccion).Include(a => a.Alumno).Include(p => p.Periodo).Include(c => c.Curso).ToList();
-       
-        //    return Json(new { data = todos });
-        //}
+        #region API
+        [HttpGet]
+        public IActionResult ObtenerTodos()
+        {
+            var todos = _unidadTrabajo.Curso.ObtenerTodos();
+            return Json(new { data = todos });
+        }
 
-        //[HttpDelete]
-        //public IActionResult Delete(int id)
-        //{
-        //    var matriculaDb = _context.Matricula.Obtener(id);
-        //    if (matriculaDb == null)
-        //    {
-        //        return Json(new { success = false, message = "Error al Borrar" });
-        //    }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var cursoDb = _unidadTrabajo.Curso.Obtener(id);
+            if (cursoDb == null)
+            {
+                return Json(new { success = false, message = "Error al Borrar" });
+            }
+            _unidadTrabajo.Curso.Remover(cursoDb);
+            _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Curso Borrada Exitosamente" });
+        }
 
-        //    _unidadTrabajo.Matricula.Remover(matriculaDb);
-        //    _unidadTrabajo.Guardar();
-        //    return Json(new { success = true, message = "Producto Borrado Exitosamente" });
-        //}
-
-        //#endregion
+        #endregion
     }
 }

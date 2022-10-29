@@ -19,13 +19,12 @@ namespace LICEORURALJASMINEZB.Data
         public DbSet<Concentrado> Concentrado { get; set; }
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Docente> Docente { get; set; }
-    
         public DbSet<GradoSeccion> GradoSeccion { get; set; }
         public DbSet<Horario> Horario { get; set; }
         public DbSet<Matricula> Matricula { get; set; }
         public DbSet<Periodo> Periodo { get; set; }
         public DbSet<Imagen> image { get; set; }
-        public DbSet<Encargado> Encargado { get; set; }
+      
     
     }
 }

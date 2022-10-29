@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LICEORURALJASMINEZB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221022035758_addAlumnoToDatabase")]
+    [Migration("20221027063611_addAlumnoToDatabase")]
     partial class addAlumnoToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,52 +190,6 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.ToTable("Docente");
                 });
 
-            modelBuilder.Entity("LICEORURALJASMINEZB.Models.Encargado", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DocumentoIdentidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EstadoCivil")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nacionalidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombres")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ocupación")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrimerApellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SegundoApellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TipoRelacion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Encargado");
-                });
-
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.GradoSeccion", b =>
                 {
                     b.Property<int>("Id")
@@ -311,20 +265,27 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<string>("Adecucion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Cedula")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CedulaEncargado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConsumeTratamientos")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CursoId")
-                        .HasColumnType("int");
+                    b.Property<string>("Correo")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdAlumno")
-                        .HasColumnType("int");
+                    b.Property<string>("Direccion")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdCurso")
-                        .HasColumnType("int");
+                    b.Property<string>("Edad")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdEncargado")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("FechaNacimiento")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IdGradoSeccion")
                         .HasColumnType("int");
@@ -338,22 +299,58 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.Property<string>("InstituciónProcedencia")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LugarNacimiento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nacionalidad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NacionalidadEncargado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreEncargado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ocupacion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PadeceAlgunaEnfermedad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrimerApellido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrimerApellidoEncargado")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Repitente")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SegundoApellido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SegundoApellidoEncargado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sexo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefonoEncargado")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("TieneExpediente")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TipoRelacion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("IdAlumno");
-
-                    b.HasIndex("IdEncargado");
 
                     b.HasIndex("IdGradoSeccion");
 
@@ -620,44 +617,28 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("LICEORURALJASMINEZB.Models.Alumno", "Alumno")
                         .WithMany()
                         .HasForeignKey("IdAlumno")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Concentrado", "Concentrado")
                         .WithMany()
                         .HasForeignKey("IdConcentrado")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("LICEORURALJASMINEZB.Models.Matricula", b =>
                 {
-                    b.HasOne("LICEORURALJASMINEZB.Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId");
-
-                    b.HasOne("LICEORURALJASMINEZB.Models.Alumno", "Alumno")
-                        .WithMany()
-                        .HasForeignKey("IdAlumno")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("LICEORURALJASMINEZB.Models.Encargado", "Encargado")
-                        .WithMany()
-                        .HasForeignKey("IdEncargado")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("LICEORURALJASMINEZB.Models.GradoSeccion", "GradoSeccion")
                         .WithMany()
                         .HasForeignKey("IdGradoSeccion")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LICEORURALJASMINEZB.Models.Periodo", "Periodo")
                         .WithMany()
                         .HasForeignKey("IdPeriodo")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -666,7 +647,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -675,7 +656,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -684,7 +665,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -693,13 +674,13 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -708,7 +689,7 @@ namespace LICEORURALJASMINEZB.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
